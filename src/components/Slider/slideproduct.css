@@ -44,6 +44,7 @@
     background: #fff;
     border-radius: 6px;
     padding:5px;
+    margin:0 5px;
     cursor: pointer;
 }
 .product-deal-new-item{
@@ -95,6 +96,8 @@
     transform: translateY(-50%);
     transition: all .5s;
     opacity: 0;
+    z-index: 2;
+    cursor: pointer;
 }
 .product-deadl-hot-btn i {
     font-size: 17px;
@@ -116,4 +119,10 @@
 }
 .product-deadl-hot-btn:hover i{
     color:#fff;
+}
+.slick-slider:hover .product-deadl-hot-btn{
+    opacity: 1;
+}
+.slick-list{
+    margin-bottom: 20px;
 }
