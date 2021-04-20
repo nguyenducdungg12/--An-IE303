@@ -21,7 +21,7 @@ function DetailProduct() {
     return (
         <div className="DetailProduct">
             <div className="container">
-                <Breadcum />
+                <Breadcum ListBreadcum={['Chi tiet san pham'] }final={"San pham"}/>
                 <div className="row">
                     <DetailProductComponenet />
                     <div class="col-lg-3 css-80">

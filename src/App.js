@@ -4,6 +4,7 @@ import Footer from './components/Footer/Footer';
 import {Switch,Route,BrowserRouter as Router } from 'react-router-dom'
 import Home from "./pages/Home/Home"
 import DetailProduct from './pages/DetailProduct.js/DetailProduct'
+import Cart from './pages/Cart/Cart'
 import './App.css'
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
               <Route path='/' exact={true} component={Home}>
               </Route>
               <Route path='/DetailProduct/:id' component={DetailProduct}></Route>
+              <Route path='/Cart' component={Cart}></Route>
           </Switch>
          <Footer></Footer> 
       <Modals></Modals>
