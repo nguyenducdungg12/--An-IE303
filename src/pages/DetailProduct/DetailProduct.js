@@ -21,7 +21,7 @@ function DetailProduct() {
     return (
         <div className="DetailProduct">
             <div className="container">
-                <Breadcum ListBreadcum={['Chi tiet san pham'] }final={"San pham"}/>
+                <Breadcum title="Laptop MSI Modern 14 A10RB-888VN"/>
                 <div className="row">
                     <DetailProductComponenet />
                     <div class="col-lg-3 css-80">
