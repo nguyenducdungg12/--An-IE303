@@ -1,13 +1,15 @@
 import React from 'react'
 
-function DetailProductComponent() {
+function DetailProductComponent(props) {
+    const {Product} = props;
+    console.log(props);
     return (
         <div className="col-lg-9 css-11">
                     <div className="css-90">
                         <div className="css-14">
                             <div className="css-1 css-1002">
                                 <div className="css-0">  
-                                    <img src="https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg" alt="" className="css-2"/>
+                                    <img src={Product.image} alt="" className="css-2"/>
                                 </div>
                                 <ul className="css-3">
                                     <li className="css-4 "> 
@@ -74,9 +76,9 @@ function DetailProductComponent() {
                         <div className="css-15">
                             <div className="detail-product">
                                 <div className="css-6 css-1002">
-                                    <h1 className="css-7">Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)</h1>
-                                    <h6 className="css-8">Thương hiệu <span className="css-12">MSI</span> <span className="css-1001"></span>  SKU: 200301388 </h6>
-                                    <h1 className="css-10">23.990.000đ</h1>
+                                    <h1 className="css-7">{Product.title}</h1>
+                                    <h6 className="css-8">Thương hiệu <span className="css-12">MSI</span> <span className="css-1001"></span>  {`SKU:${Product.id}`} </h6>
+                                    <h1 className="css-10">{Product.newprice}</h1>
                                 </div>
                                 <div className="css-30 css-1002">
                                     <div className="css-31">Chọn thêm 1 trong những khuyến mãi sau</div>

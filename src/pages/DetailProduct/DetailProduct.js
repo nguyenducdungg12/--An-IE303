@@ -1,5 +1,6 @@
-import React,{useState} from 'react'
+import React,{useEffect,useState} from 'react'
 import Breadcum from '../../components/Breadcum/Breadcum'
+import CallApi from '../../helper/axiosClient'
 import "./DetailProduct.css"
 import DetailProductComponenet from '../../components/DetailProduct/DetailProductComponent'
 import SlideProduct from '../../components/Slider/slideproduct';
@@ -7,23 +8,36 @@ import ContentProduct from '../../components/DetailProduct/ContentProduct'
 import ConfigProduct from '../../components/DetailProduct/ConfigProduct'
 import FeedbackStar from '../../components/DetailProduct/FeedBackStar'
 import Comment from '../../components/DetailProduct/Comment'
-function DetailProduct() {
+function DetailProduct(props) {
+    const {id} = props.match.params;
     const [MoreContent, setMoreContent] = useState(false);
+    const [Product, setProduct] = useState(null);
     const fakeData = {
         ImageMain:"https://tmp.phongvu.vn/wp-content/uploads/2019/06/ASUS-VivoBook-15-A512.jpg",
         ListTitle:["Chất liệu 100% nhôm tái chế ","Màn hình Retina rực rỡ","Hiệu suất tối ưu cho mọi tác vụ "],
         ListImage:["https://tmp.phongvu.vn/wp-content/uploads/2019/06/ASUS-VivoBook-15-A512-1.jpg","https://tmp.phongvu.vn/wp-content/uploads/2019/06/ASUS-VivoBook-15-A512-3.jpg","https://tmp.phongvu.vn/wp-content/uploads/2019/06/ASUS-VivoBook-15-A512-2.jpg"],
         ListContent:["Laptop MacBook Air 2019 MVFM2SA/A trang bị màn hình độ phân giải 2560x1600 cho hơn 4 triệu pixel, hình ảnh được nâng lên một cấp độ mới với các chi tiết sắc nét và rõ ràng. Và công nghệ True Tone tự động điều chỉnh điểm trắng của màn hình để phù hợp với nhiệt độ màu của môi trường xung quanh bạn - làm cho các trang web và email trông tự nhiên. Với màu sắc hơn 48% và viền mỏng hơn 50% thế hệ trước, mọi thứ bạn thấy đều phong phú và rực rỡ, bạn có thể tập trung vào những gì trên màn hình của bạn. ","Mặc dù chỉ nặng 1.3 kg, Laptop MacBook Air 2019 MVFM2SA/A mới có sức mạnh khá mạnh mẽ. Bộ xử lý Intel Core thế hệ mới nhất giúp bạn tăng sức mạnh thông qua các hoạt động hàng ngày, từ đọc email và duyệt web đến tạo các bài thuyết trình và chỉnh sửa Keynote trong iMovie. Bộ nhớ có thể lên tới 16GB (tùy chọn cấu hình phiên bản) cho phép bạn hoạt động trơn tru ngay cả khi mở nhiều ứng dụng, trong khi bộ nhớ SSD có thể nâng cấp lên tới 1TB cho phép bạn khởi chạy ứng dụng trong nháy mắt và cung cấp nhiều dung lượng cho tất cả tài liệu, ảnh và video của bạn.        ","Laptop MacBook Air 2019 MVFM2SA/A trang bị màn hình độ phân giải 2560x1600 cho hơn 4 triệu pixel, hình ảnh được nâng lên một cấp độ mới với các chi tiết sắc nét và rõ ràng. Và công nghệ True Tone tự động điều chỉnh điểm trắng của màn hình để phù hợp với nhiệt độ màu của môi trường xung quanh bạn - làm cho các trang web và email trông tự nhiên. Với màu sắc hơn 48% và viền mỏng hơn 50% thế hệ trước, mọi thứ bạn thấy đều phong phú và rực rỡ, bạn có thể tập trung vào những gì trên màn hình của bạn.        "]
     }
+    useEffect(() => {
+        async function getProduct(){
+            var data = await CallApi({
+                url : `http://localhost:8080/api/product/${id}`,
+                method : 'get'
+            })
+            console.log(1234,123);
+            setProduct(data);
+        }   
+        getProduct();
+    }, [])
     function onShowMoreContent(){
         setMoreContent(true);
     }
-    return (
+    return (Product &&
         <div className="DetailProduct">
             <div className="container">
-                <Breadcum title="Laptop MSI Modern 14 A10RB-888VN"/>
+                <Breadcum ListBreadcum={['Danh sach san pham']} final="Laptop MSI Modern 14 A10RB-888VN"/>
                 <div className="row">
-                    <DetailProductComponenet />
+                    <DetailProductComponenet Product = {Product}/>
                     <div class="col-lg-3 css-80">
                         <div class="css-100">
                             <div class="css-81 css-1002">

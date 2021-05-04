@@ -1,161 +1,33 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React,{useEffect,useState} from 'react';
 import Breadcum from '../../components/Breadcum/Breadcum';
 import './Products.css'
 import ProductSort from '../../components/Products/ProductSort'
 import ProductItem from './../../components/Products/ProductItem';
 import Pagination from '../../components/Pagination/Pagination';
+import {useLocation} from 'react-router-dom'
+import CallApi from '../../helper/axiosClient'
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
 const Products = (props) => {
-    const data = [
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-        {
-            id: 0,
-            name: `Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-            img: ``,
-            sl: 1,
-            pricenew: `23.990.000đ`,
-            priceold: ` 21.990.000đ`
-        },
-    ];
+    const query = useQuery();
+    const page = query.get("page");
+    const {category} = props.match.params;
+    const type = query.get("type");
+    useEffect(()=>{
+       const getProduct = async ()=>{
+            const Data = await CallApi({
+                url : `http://localhost:8080/api/products/${category}?page=${page}&type=${type}`,
+                method : 'get',
+            });
+            
+            
+        }
+    },[])
     function SubmitForm(value){
         
     }
-    function handleRenderItem() {
+   /*  function handleRenderItem() {
         window.scrollTo({
             top: 0,
             behavior: "smooth"
@@ -170,9 +42,9 @@ const Products = (props) => {
             render++;
         }
         return result;
-    }
-    var totalPage = Math.ceil(data.length / 15);
-    return (
+    } */
+/*     var totalPage = Math.ceil(data.length / 15);
+ */    return (
         <div class="body">
             <div class="grid">
                 <Breadcum final="Laptop"></Breadcum>
@@ -181,12 +53,12 @@ const Products = (props) => {
             <div class="home-product">
                 <div class="grid">
                     <div class="grid__row">
-                        {handleRenderItem()}
-                    </div>
+{/*                         {handleRenderItem()}
+ */}                    </div>
                 </div>
             </div>
-            <Pagination totalPage={totalPage} crrpage={parseInt(props.match.params.page)}></Pagination>
-        </div>
+{/*             <Pagination totalPage={totalPage} crrpage={parseInt(props.match.params.page)}></Pagination>
+ */}        </div>
     );
 };
 

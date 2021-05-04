@@ -10,9 +10,10 @@ import icon2 from '../../assets/img/xk2s.png'
 import icon3 from '../../assets/img/xk3s.png'
 import icon4 from '../../assets/img/xk4s.png'
 import icon5 from '../../assets/img/xk5s.png'
-
+import laptop from '../../assets/img/xxx21.png'
 import * as actions from '../../actions';
 import { useDispatch } from 'react-redux';
+import {Link} from 'react-router-dom'
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -24,9 +25,9 @@ const Header = () => {
             <nav>
                 <div class="container">
                     <div class="nav-wrap">
-                        <a href="#">
+                        <Link to="/">
                             <img src={logo} alt="" class="nav-logo" />
-                        </a>
+                        </Link>
                         <div class="nav-search">
                             <input type="text" class="nav-input" placeholder="Nhập từ khóa cần tìm" />
                             <span class="btn-search">
@@ -123,7 +124,8 @@ const Header = () => {
                             <div class="header-categore-dropdown-wrap">
                                 <ul class="header-category-list">
                                     <li class="header-category-item">
-                                        <img src="./img/xxx21.png" alt="" class="header-category-item-img"/>
+                                       <Link to='product/'></Link>
+                                        <img src={laptop} alt="" class="header-category-item-img"/>
                                         <span>Laptop</span>
                                         <div class="header-category-item-notify category-notify-1">
                                             <div class="header-category-item-notify-list">
@@ -219,6 +221,18 @@ const Header = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                    </li>
+                                    <li class="header-category-item">
+                                        <img src={laptop} alt="" class="header-category-item-img"/>
+                                        <span>Chuột</span>
+                                    </li>
+                                    <li class="header-category-item">
+                                        <img src={laptop} alt="" class="header-category-item-img"/>
+                                        <span>Màn hình</span>
+                                    </li>
+                                    <li class="header-category-item">
+                                        <img src={laptop} alt="" class="header-category-item-img"/>
+                                        <span>Laptop</span>
                                     </li>
                                 </ul>
                             </div>

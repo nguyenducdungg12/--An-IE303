@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import Slider from "react-slick";
-import Slideitem from './slideitem';
+import {Link} from 'react-router-dom'
 import './slideproduct.css';
-import temp from '../../assets/img/Product/product10.webp';
-import temp1 from '../../assets/img/Product/product9.webp';
 
 const NextSlide = (props) => {
     const { onClick } = props;
@@ -15,85 +13,30 @@ const PrevSlide = (props) => {
 }
 const SlideProductItem = (props) => {
     const { dataProduct } = props;
-    return <a href="../Trangchitiet/index.html" class="item product-deal-hot-item">
-        <img src={dataProduct.src} alt="" class="product-deadl-hot-img" />
+    return <Link to={`./DetailProduct/${dataProduct.id}`}class="item product-deal-hot-item">
+        <img src={dataProduct.image} alt="" class="product-deadl-hot-img" />
         <div class="product-deal-hot-desc">
             <p class="product-deal-ho-namet">
-                {dataProduct.name}
+                {dataProduct.title}
         </p>
             <div class="product-deal-hot-price">
                 <span class="product-deadl-hot-price-old">
-                {dataProduct.priceold}
+                {dataProduct.oldprice}đ
             </span>
                 <span class="product-deadl-hot-price-new">
-                {dataProduct.pricenew}
+                {dataProduct.newprice}đ
             </span>
             </div>
         </div>
-    </a>
+    </Link>
 }
 const SlideProduct = (props) => {
-    // const { listProduct } = props;
-    var listProduct=[{
-        id:0,
-        name:`Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-        src:temp,
-        pricenew:`23.990.000đ`,
-        priceold:` 21.990.000đ`
-    },{
-        id:0,
-        name:`Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-        src:temp1,
-        pricenew:`23.990.000đ`,
-        priceold:` 21.990.000đ`
-    },{
-        id:0,
-        name:`Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-        src:temp,
-        pricenew:`23.990.000đ`,
-        priceold:` 21.990.000đ`
-    },
-    {
-        id:0,
-        name:`Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-        src:temp1,
-        pricenew:`23.990.000đ`,
-        priceold:` 21.990.000đ`
-    },
-    {
-        id:0,
-        name:`Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-        src:temp1,
-        pricenew:`23.990.000đ`,
-        priceold:` 21.990.000đ`
-    },
-    {
-        id:0,
-        name:`Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-        src:temp1,
-        pricenew:`23.990.000đ`,
-        priceold:` 21.990.000đ`
-    },
-    {
-        id:0,
-        name:`Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-        src:temp1,
-        pricenew:`23.990.000đ`,
-        priceold:` 21.990.000đ`
-    },
-    {
-        id:0,
-        name:`Laptop MSI Modern 14 A10RB-888VN (14" FHD/i7-10510U/8GB/512GB SSD/GeForce MX250/Win10/1.2kg)`,
-        src:temp1,
-        pricenew:`23.990.000đ`,
-        priceold:` 21.990.000đ`
-    },
-  ]
-    function renderSlide() {
+    const { ListProduct,type } = props;
+
+    function renderSlide(ListProduct) {
         var result = [];
-        for (var i = 0; i < listProduct.length; i++) {
-            result.push(<SlideProductItem dataProduct={listProduct[i]} key={i}>
-            </SlideProductItem>)
+        if(ListProduct){
+             result = ListProduct.map((item,stt)=><SlideProductItem dataProduct={item} key={stt}></SlideProductItem>)
         }
         return result;
     }
@@ -101,14 +44,14 @@ const SlideProduct = (props) => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 5,
+        slidesToShow:5,
         slidesToScroll:1,
         nextArrow: <PrevSlide />,
         prevArrow: <NextSlide />,
     };
     return (
         <Slider {...settings}>
-            {renderSlide()}
+            {renderSlide(ListProduct,type)}
         </Slider>
     );
 };

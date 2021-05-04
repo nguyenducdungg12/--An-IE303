@@ -15,7 +15,7 @@ function App() {
           <Header></Header>
           <Switch>
               <Route path='/' exact={true} component={Home}></Route>
-              <Route path='/Products/page=:page' component={Products}></Route>
+              <Route path='/Products/:category' component={Products}></Route>
               <Route path='/DetailProduct/:id' component={DetailProduct}></Route>
               <Route path='/Cart' component={Cart}></Route>
           </Switch> 

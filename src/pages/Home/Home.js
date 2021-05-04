@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import Slider from '../../components/Slider/slider';
+import {Link} from 'react-router-dom'
 import "./home.css"
 import Product_PK from '../../components/Product_PK/Product_PK'
 import Banner from '../../components/Banner/Banner';
@@ -16,11 +17,29 @@ import ImageBanner10 from '../../assets/img/banner7.webp'
 import ImageBanner11 from '../../assets/img/banner8.webp'
 import ImageBanner12 from '../../assets/img/banner9.webp'
 import SlideProduct from '../../components/Slider/slideproduct';
-
+import axiosClient from '../../helper/axiosClient';
 
 
 const Home = () => {
+    const [ListProductKM, setListProductKM] = useState(null);
+    const [ListProductHot, setListProductHot] = useState(null);
+    const [ListProductBC, setListProductBC] = useState(null);
+    const [ListProductPK, setListProductPK] = useState(null);
 
+    useEffect(() => {
+        async function getListProduct(){
+            var Data =await axiosClient({
+                url : 'http://localhost:8080/api/products',
+                method : 'get',
+            });
+            setListProductKM(Data.filter(item=>item.type == 1)); 
+            setListProductHot(Data.filter(item=>item.type == 2)); 
+            setListProductBC(Data.filter(item=>item.type == 3)); 
+            setListProductPK(Data.filter(item=>item.category != 'laptop')); 
+        }
+        getListProduct();
+    }, [])
+    console.log(ListProductBC,ListProductHot,ListProductPK)
     return (
         <div className="main">
             <div className="slide-home">
@@ -35,19 +54,18 @@ const Home = () => {
             <Banner listBanner={[ImageBanner1, ImageBanner2, ImageBanner3, ImageBanner4]}></Banner>
             <div className="product-deal-hot">
                 <div class="container">
-
                     <div class="product-deal-hot-wrap">
                         <div class="product-hot-intro">
                             <h3 class="product-deal-hot-title">
                                 Laptop Khuyến Mãi Trong Tháng
                     </h3>
-                            <a href="../Trangsanpham/khuyenmai.html" class="product-hot-btn">
+                            <Link to="/Products/page=1" class="product-hot-btn">
                                 Xem tất cả <i class="fas fa-chevron-right"></i>
-                            </a>
+                            </Link>
                         </div>
                         <div class="row mx-4">
                             <div className="col-12">
-                                <SlideProduct></SlideProduct>
+                                <SlideProduct ListProduct={ListProductKM} type={1}></SlideProduct>
                             </div>
                         </div>
                     </div>
@@ -60,7 +78,7 @@ const Home = () => {
                     <div class="product-deal-hot-wrap">
                         <div class="product-hot-intro">
                             <h3 class="product-deal-hot-title">
-                                Laptop Khuyến Mãi Trong Tháng
+                                Laptop Bán Chạy Trong Tháng
                     </h3>
                             <a href="../Trangsanpham/khuyenmai.html" class="product-hot-btn">
                                 Xem tất cả <i class="fas fa-chevron-right"></i>
@@ -68,7 +86,7 @@ const Home = () => {
                         </div>
                         <div class="row mx-4">
                             <div className="col-12">
-                                <SlideProduct></SlideProduct>
+                                <SlideProduct ListProduct={ListProductBC} type={2}></SlideProduct>
                             </div>
                         </div>
                     </div>
@@ -81,7 +99,7 @@ const Home = () => {
                     <div class="product-deal-hot-wrap">
                         <div class="product-hot-intro">
                             <h3 class="product-deal-hot-title">
-                                Laptop Khuyến Mãi Trong Tháng
+                                Laptop Mới Nhất Trong Tháng
                     </h3>
                             <a href="../Trangsanpham/khuyenmai.html" class="product-hot-btn">
                                 Xem tất cả <i class="fas fa-chevron-right"></i>
@@ -89,7 +107,7 @@ const Home = () => {
                         </div>
                         <div class="row mx-4">
                             <div className="col-12">
-                                <SlideProduct></SlideProduct>
+                                <SlideProduct ListProduct={ListProductHot} type={3}></SlideProduct>
                             </div>
                         </div>
                     </div>
@@ -165,7 +183,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <Product_PK/>
+            <Product_PK ListProduct = {ListProductPK}/>
         </div>
     );
 };
