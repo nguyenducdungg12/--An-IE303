@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import Slider from "react-slick";
 import Slideitem from './slideitem';
 import './slider.css';
