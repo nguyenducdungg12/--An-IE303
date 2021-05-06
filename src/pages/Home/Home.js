@@ -30,7 +30,8 @@ const Home = () => {
                 url: `http://localhost:8080/api/products/${category}?page=${page}&type=${type}`,
                 method: 'get',
             });
-            if (category === 'laptop') {
+            console.log('chay data');
+            if (category == 'laptop') {
                 switch (type) {
                     case 1:
                         setListProductKM(Data.listProducts); break;
@@ -45,11 +46,12 @@ const Home = () => {
             else
                 setListProductPK(Data.listProducts);
         }
-        getListProduct('laptop', 1, 1);
-        getListProduct('laptop', 1, 2);
-        getListProduct('laptop', 1, 3);
-        getListProduct('PK', 1, 1);
+        getListProduct('laptop', 1, 1)
+            .then(()=>getListProduct('laptop', 1, 2))
+            .then(()=>getListProduct('laptop', 1, 3))
+            .then(()=>getListProduct('PK', 1, 1));
     }, [])
+    console.log(ListProductKM,ListProductHot,ListProductBC,ListProductPK);
     return (
         <div className="main">
             <div className="slide-home">

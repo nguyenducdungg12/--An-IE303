@@ -8,6 +8,8 @@ import Home from "./pages/Home/Home"
 import DetailProduct from './pages/DetailProduct/DetailProduct'
 import Cart from './pages/Cart/Cart'
 import './App.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
       <Router>
@@ -21,6 +23,7 @@ function App() {
           </Switch> 
          <Footer></Footer> 
       <Modals></Modals>
+      <ToastContainer/>
     </div>
       </Router>
     );

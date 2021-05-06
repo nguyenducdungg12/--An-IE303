@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './header.css';
 import logo from '../../assets/img/logo.png';
 import banner from '../../assets/img/banner1.png';
@@ -12,20 +12,46 @@ import icon4 from '../../assets/img/xk4s.png'
 import icon5 from '../../assets/img/xk5s.png'
 import laptop from '../../assets/img/xxx21.png'
 import * as actions from '../../actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom'
-
+import CartItemHeader from './CartItemHeader'
 const Header = () => {
-    const history=useHistory();
+    const history = useHistory();
     const dispatch = useDispatch();
+    const product = useSelector(state=>state.cart)||[];
     const [searchValue, setsearchValue] = useState(null);
-    function onChangeValue(e){
+    function onChangeValue(e) {
         setsearchValue(e.target.value);
     }
-    function onSearch(e){
+    function onSearch(e) {
         e.preventDefault();
-        history.push(`/Products/search?q=${searchValue}`);
-        setsearchValue('');
+        if (searchValue) {
+            history.push(`/Products/search?q=${searchValue}`);
+            setsearchValue('');
+        }
+    }
+    function renderTotalMoney(){
+        var total=0;
+        if(product.length>0){
+            total=product[0].soluong*product[0].newprice;
+            if(product.length>2){
+                return product.reduce((a,b)=>(a.soluong*a.newprice)+(b.soluong*b.newprice));
+            }
+        }
+        return total;
+    }
+    function renderCartItem(){
+        var result=null;
+        if(product&&product.length>0){
+            result=product.map((pro,index)=>{
+                return (
+                    <CartItemHeader key={index} product={pro}></CartItemHeader>
+                )
+            })
+        }
+        else
+            result="Không có sản phẩm nào!!";
+        return result;
     }
     return (
         <header>
@@ -39,7 +65,7 @@ const Header = () => {
                             <img src={logo} alt="" class="nav-logo" />
                         </Link>
                         <form class="nav-search" onSubmit={onSearch}>
-                            <input type="text" class="nav-input" name="q" value={searchValue} placeholder="Nhập từ khóa cần tìm" onChange={onChangeValue}/>
+                            <input type="text" class="nav-input" name="q" value={searchValue} placeholder="Nhập từ khóa cần tìm" onChange={onChangeValue} />
                             <button type="submit">
                                 <span class="btn-search">
                                     <i class="fas fa-search"></i>
@@ -56,55 +82,14 @@ const Header = () => {
                                 <span>ĐĂNG NHẬP</span>
                             </li>
                             <li class="nav-item nav-item__cart">
+                                <div class="nav-item__cart--noti">{product.length}</div>
                                 <Link to="/Cart" class="nav-item__cart-link">
                                     <img src={giohang} alt="" class='nav-item-img' />
                                     <span>GIỎ HÀNG</span>
                                 </Link>
                                 <div class=" nav-item__cart-list">
                                     <ul class="contain-cart">
-                                        <li class="contain-cart-item">
-                                            <img alt="" class="contain-cart__img" />
-                                            <div class="contain-cart__contain">
-
-                                                <span class="contain-cart__text">Laptop Apple MacBook Pro 2018 13.3" MR9R2 (13.3"/Core i5/8GB/Iris Plus 650/macOS)</span>
-                                                <div class='contain-cart-price'>
-                                                    <span class="contain-cart__count">Số lượng: 2</span>
-                                                    <span class="contain-cart__money">Thành Tiền: 29.000.000đ</span>
-                                                </div>
-                                            </div>
-                                            <span class="contain-cart-item-close">
-                                                <i class="fas fa-times"></i>
-                                            </span>
-                                        </li>
-                                        <li class="contain-cart-item">
-                                            <img alt="" class="contain-cart__img" />
-                                            <div class="contain-cart__contain">
-
-                                                <span class="contain-cart__text">Laptop Apple MacBook Pro 2018 13.3" MR9R2 (13.3"/Core i5/8GB/Iris Plus 650/macOS)</span>
-                                                <div class='contain-cart-price'>
-                                                    <span class="contain-cart__count">Số lượng: 1</span>
-                                                    <span class="contain-cart__money">Thành Tiền: 48.990.000đ</span>
-                                                </div>
-                                            </div>
-                                            <span class="contain-cart-item-close">
-                                                <i class="fas fa-times"></i>
-                                            </span>
-                                        </li>
-                                        <li class="contain-cart-item">
-                                            <img alt="" class="contain-cart__img" />
-                                            <div class="contain-cart__contain">
-
-                                                <span class="contain-cart__text">Laptop Apple MacBook Pro 2018 13.3" MR9R2 (13.3"/Core i5/8GB/Iris Plus 650/macOS)</span>
-                                                <div class='contain-cart-price'>
-                                                    <span class="contain-cart__count">Số lượng: 1</span>
-                                                    <span class="contain-cart__money">Thành Tiền: 12.990.000đ</span>
-                                                </div>
-                                            </div>
-                                            <span class="contain-cart-item-close">
-                                                <i class="fas fa-times"></i>
-                                            </span>
-                                        </li>
-
+                                        {renderCartItem()}
                                     </ul>
                                     <div class="contain-cart-total">
                                         <div class="container-cart-total-pay">
@@ -112,20 +97,13 @@ const Header = () => {
                                                 Tổng Tiền:
                                         </span>
                                             <span class="container-cart-total-pay__price">
-                                                2.000.000đ
+                                            {renderTotalMoney()}
                                         </span>
                                         </div>
                                     </div>
-                                    <a href="../Trangsanpham/giohang.html" class="container-cart-btn-link">Xem Tất Cả</a>
-
+                                    <Link to="/Cart" class="container-cart-btn-link">Xem Tất Cả</Link>
                                 </div>
                             </li>
-                            {/* <li class="nav-item">
-                                <a href="../Trangnews/index.html" target="_blank" class="nav-item-link">
-                                    <img  alt="" class='nav-item-img' />
-                                    <span>TIN TỨC</span>
-                                </a>
-                            </li> */}
                         </ul>
                     </div>
                     <div class="header-main-wrap">

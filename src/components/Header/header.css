@@ -149,6 +149,9 @@ nav{
 .contain-cart-item-close i{
     font-size: 18px;
 }
+.icon-item-close:hover{
+    color:blue;
+}
 .contain-cart-total{
     padding:20px 20px 0 20px;
 }
@@ -248,9 +251,8 @@ nav{
     margin-right:6px;
     position: relative;
 }
-.nav-item__cart:after{
+.nav-item__cart--noti{
     position: absolute;
-    content:'3';
     top:-7px;
     left:-8px;
     background:rgb(20, 53, 195);
@@ -261,6 +263,7 @@ nav{
     display:flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
 }
 .nav-item span{
     font-weight: 700;
