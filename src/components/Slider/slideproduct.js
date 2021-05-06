@@ -32,7 +32,6 @@ const SlideProductItem = (props) => {
 }
 const SlideProduct = (props) => {
     const { ListProduct,type } = props;
-
     function renderSlide(ListProduct) {
         var result = [];
         if(ListProduct){

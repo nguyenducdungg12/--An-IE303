@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './header.css';
 import logo from '../../assets/img/logo.png';
 import banner from '../../assets/img/banner1.png';
@@ -13,10 +13,20 @@ import icon5 from '../../assets/img/xk5s.png'
 import laptop from '../../assets/img/xxx21.png'
 import * as actions from '../../actions';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 const Header = () => {
+    const history=useHistory();
     const dispatch = useDispatch();
+    const [searchValue, setsearchValue] = useState(null);
+    function onChangeValue(e){
+        setsearchValue(e.target.value);
+    }
+    function onSearch(e){
+        e.preventDefault();
+        history.push(`/Products/search?q=${searchValue}`);
+        setsearchValue('');
+    }
     return (
         <header>
             <div class="banner_header">
@@ -28,8 +38,8 @@ const Header = () => {
                         <Link to="/">
                             <img src={logo} alt="" class="nav-logo" />
                         </Link>
-                        <form method="GET" action="/Products/search" class="nav-search">
-                            <input type="text" class="nav-input" name="q" placeholder="Nhập từ khóa cần tìm" />
+                        <form class="nav-search" onSubmit={onSearch}>
+                            <input type="text" class="nav-input" name="q" value={searchValue} placeholder="Nhập từ khóa cần tìm" onChange={onChangeValue}/>
                             <button type="submit">
                                 <span class="btn-search">
                                     <i class="fas fa-search"></i>

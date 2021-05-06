@@ -11,6 +11,7 @@ function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 const Products = (props) => {
+    console.log(props);
     const [ListProduct, setListProduct] = useState(null);
     const [totalPage, settotalPage] = useState(null);
     const query = useQuery();
@@ -37,7 +38,7 @@ const Products = (props) => {
             settotalPage(Data.totalPage);
         }
         getProduct();
-    }, [])
+    },[props.location])
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -47,7 +48,6 @@ const Products = (props) => {
     })
     function handleRenderItem(ListProduct) {
         var result = [];
-        console.log(ListProduct);
         if (ListProduct) {
             result = ListProduct.map((item, stt) => <ProductItem item={item} key={stt}></ProductItem>);
         }
