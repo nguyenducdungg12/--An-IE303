@@ -4,6 +4,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from './../../actions/index';
+import { toast } from 'react-toastify';
 function CartItemComponent(props) {
     const {data}=props;
     const dispatch=useDispatch();
@@ -61,6 +62,7 @@ function CartComponent(props) {
                             for(let i=0;i<ListCart.length;i++){
                                 dispatch(actions.deleteCartItem(ListCart[i]));
                             }
+                            toast.error("Xóa tất cả sản phẩm thành công");
                         }
                     },
                 ]

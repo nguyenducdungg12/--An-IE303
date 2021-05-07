@@ -50,7 +50,7 @@ const Header = () => {
             })
         }
         else
-            result="Không có sản phẩm nào!!";
+            result=<div className="header-cart--empty">Không có sản phẩm</div>;
         return result;
     }
     return (
@@ -66,11 +66,9 @@ const Header = () => {
                         </Link>
                         <form class="nav-search" onSubmit={onSearch}>
                             <input type="text" class="nav-input" name="q" value={searchValue} placeholder="Nhập từ khóa cần tìm" onChange={onChangeValue} />
-                            <button type="submit">
-                                <span class="btn-search">
+                                <button type="submit" class="btn-search">
                                     <i class="fas fa-search"></i>
-                                </span>
-                            </button>
+                                </button>
                         </form>
                         <ul class="nav-menu">
                             <li class="nav-item" id='dangky' onClick={() => dispatch(actions.showRegister())}>

@@ -22,7 +22,6 @@ const Slide = (props) => {
         return result;
     }
     var settings = {
-        dots: true,
         infinite: true,
         speed: 500,
        ...setting,

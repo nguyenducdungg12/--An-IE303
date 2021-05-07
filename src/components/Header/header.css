@@ -60,6 +60,7 @@ nav{
     color: #fff;
     border-radius: 9px;
     cursor: pointer;
+    border: none;
 }
 .nav-input{
     width: 100%;
@@ -609,4 +610,9 @@ nav{
 .banner-img-1{
     width: 99.2%;
     cursor: pointer;
+}
+
+.header-cart--empty{
+    text-align: center;
+    padding:20px;
 }
