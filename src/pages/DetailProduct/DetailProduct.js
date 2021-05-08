@@ -21,7 +21,7 @@ function DetailProduct(props) {
     useEffect(() => {
         async function getProduct(){
             var data = await CallApi({
-                url : `http://localhost:8080/api/product/${id}`,
+                url : `http://localhost:8080/api/products/${id}`,
                 method : 'get'
             })
             console.log(1234,123);

@@ -50,6 +50,7 @@ const Home = () => {
         getListProduct('laptop', 1, 3);
         getListProduct('PK', 1, 1);
     }, [])
+    console.log(ListProductHot,ListProductKM,ListProductBC,ListProductPK)
     return (
         <div className="main">
             <div className="slide-home">
