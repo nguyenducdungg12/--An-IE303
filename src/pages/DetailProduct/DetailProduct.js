@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react'
 import Breadcum from '../../components/Breadcum/Breadcum'
 import CallApi from '../../helper/axiosClient'
 import "./DetailProduct.css"
-import DetailProductComponenet from '../../components/DetailProduct/DetailProductComponent'
+import DetailProductComponent from '../../components/DetailProduct/DetailProductComponent'
 import SlideProduct from '../../components/Slider/slideproduct';
 import ContentProduct from '../../components/DetailProduct/ContentProduct'
 import ConfigProduct from '../../components/DetailProduct/ConfigProduct'
@@ -32,12 +32,15 @@ function DetailProduct(props) {
     function onShowMoreContent(){
         setMoreContent(true);
     }
+    function renderNotify(notify){
+
+    }
     return (Product &&
         <div className="DetailProduct">
             <div className="container">
                 <Breadcum ListBreadcum={['Danh sach san pham']} final="Laptop MSI Modern 14 A10RB-888VN"/>
                 <div className="row">
-                    <DetailProductComponenet Product = {Product}/>
+                    <DetailProductComponent Product = {Product} Notify={renderNotify}/>
                     <div class="col-lg-3 css-80">
                         <div class="css-100">
                             <div class="css-81 css-1002">

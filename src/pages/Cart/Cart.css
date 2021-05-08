@@ -524,6 +524,12 @@
     font-weight: 300;
     color: rgb(81, 81, 255);
 }
+.cart__info-delete--disable{
+    font-size: 14px;
+    font-weight: 300;
+    color: rgb(166 166 191);
+    cursor: default;
+}
 .cart__info-delete:hover{
     color: red;
     cursor: pointer;

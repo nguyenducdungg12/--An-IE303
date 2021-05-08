@@ -1,42 +1,80 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import CartEmpty from './CartEmpty';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { useSelector, useDispatch } from 'react-redux';
+import * as actions from './../../actions/index';
+import { toast } from 'react-toastify';
 function CartItemComponent(props) {
-    const { image, title, id, oldPrice, newPrice, quantity } = props.data;
+    const {data}=props;
+    const dispatch=useDispatch();
     return (
         <div class="cart__item">
             <div class="cart__item-info">
-                <img src={image} alt="" class="cart__item-img" />
+                <img src={data.image} alt="" class="cart__item-img" />
                 <div class="cart__item-info-list">
                     <span class="cart__item-name">
-                        {title}</span>
-                    <span class="cart__item-name-qr">{id}</span>
+                        {data.title}</span>
+                    <span class="cart__item-name-qr">{data.id}</span>
                 </div>
             </div>
             <div class="cart__item-detail">
                 <div>
-                    <button class="cart__item-remove">
-                        <i class="far fa-trash-alt"></i>
+                    <button className="cart__item-remove" onClick={() => dispatch(actions.changeQuantityCart(-1,data))}>
+                        <i class={`${data.soluong == 1 ? 'far fa-trash-alt' : 'fas fa-minus'}`}></i>
                     </button>
-                    <span class="cart__item-quantity">{quantity}</span>
-                    <button class="cart__item-add">
+                    <span class="cart__item-quantity">{data.soluong}</span>
+                    <button class="cart__item-add" onClick={() => dispatch(actions.changeQuantityCart(1,data))}>
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>
             </div>
             <div class="cart__item-price">
-                <div class="cart__item-price-current">{newPrice}đ</div>
-                <div class="cart__item-price-old">{oldPrice}đ</div>
+                <div class="cart__item-price-current">{data.newprice * data.soluong}đ</div>
+                <div class="cart__item-price-old">{data.oldprice * data.soluong}đ</div>
             </div>
         </div>
     )
 }
+
 function CartComponent(props) {
-    const { ListCart } = props;
+    const ListCart=useSelector(state=>state.cart);
+    const dispatch=useDispatch();
+    function renderTotalMoney(){
+        var total=0;
+        if(ListCart.length>0){
+            total=ListCart[0].soluong*ListCart[0].newprice;
+            if(ListCart.length>2){
+                return ListCart.reduce((a,b)=>(a.soluong*a.newprice)+(b.soluong*b.newprice));
+            }
+        }
+        return total;
+    }
+    function handleDeleteAllItem() {
+        if (ListCart&&ListCart.length>0) {
+            confirmAlert({
+                title: 'Cảnh báo',
+                message: 'Bạn có chắn muốn xóa tất cả giỏ hàng',
+                buttons: [
+                    {
+                        label: 'Yes',
+                        onClick: () => {
+                            for(let i=0;i<ListCart.length;i++){
+                                dispatch(actions.deleteCartItem(ListCart[i]));
+                            }
+                            toast.error("Xóa tất cả sản phẩm thành công");
+                        }
+                    },
+                ]
+            });
+        }
+    }
     function renderListCart() {
         var content = [];
-        if (ListCart) {
+        if (ListCart && ListCart.length > 0)
             content = ListCart.map((item, stt) => <CartItemComponent data={item} key={stt} />);
-        }
+        else
+            content = (<CartEmpty></CartEmpty>);
         return content;
     }
     return (
@@ -45,7 +83,7 @@ function CartComponent(props) {
                 <div class="grid__column-8">
                     <div class="cart__info">
                         <span class="cart__info-quantity">Giỏ hàng có {ListCart && ListCart.length} sản phẩm</span>
-                        <span class="cart__info-delete">Xóa tất cả</span>
+                        <span class={`${!ListCart||ListCart.length<1?'cart__info-delete--disable':'cart__info-delete'}`} onClick={handleDeleteAllItem}>Xóa tất cả</span>
                     </div>
                 </div>
             </div>
@@ -65,19 +103,19 @@ function CartComponent(props) {
                         <span class="cart-pay-text">Thanh toán(Đã bao gồm VAT)</span>
                         <div class="cart-pay-sum">
                             <span class="cart-pay-sum-a">Tạm tính</span>
-                            <span class="cart-pay-sum-money">10.000.000 đ</span>
+                            <span class="cart-pay-sum-money">{renderTotalMoney()}đ</span>
                         </div>
                         <div class="cart-pay-transport">
                             <span class="cart-pay-transport-a">Phí vận chuyển</span>
-                            <span class="cart-pay-transport-money">0 đ</span>
+                            <span class="cart-pay-transport-money">30.000 đ</span>
                         </div>
                         <div class="cart-pay-sale">
                             <span class="cart-pay-sale-a">Khuyến mãi</span>
-                            <span class="cart-pay-sale-money">1.000.000 đ</span>
+                            <span class="cart-pay-sale-money">0.000.000 đ</span>
                         </div>
                         <div class="cart-pay-check">
                             <span class="cart-pay-check-a">Thành tiền</span>
-                            <span class="cart-pay-check-money">9.000.000 đ</span>
+                            <span class="cart-pay-check-money">{renderTotalMoney()+30000}</span>
                         </div>
                         <button class="cart-pay-btn-pay">
                             THANH TOÁN

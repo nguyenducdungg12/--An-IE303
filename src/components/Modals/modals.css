@@ -23,10 +23,28 @@
     background:rgba(0,0,0,0.4);
     display:flex;
 }
+.modal-main__title--container__child{
+    width: 50%;
+    height: 100%;
+    padding:10px 20px;
+    background-color: rgba(0, 0, 0,0.1);
+    cursor:pointer;
+}
+.modal-main__title--container__child--active{
+    border-top:5px solid rgba(56, 174, 252, 0.4);
+    background-color: white;
+    box-shadow: 8px -2px 12px -10px rgba(0,0,0,0.85);
+}
+.modal-main__title--container{
+    display: flex;
+    justify-content: center;
+}
 .modal-main__title{
-    font-size:24px;
+    font-size:20px;
     text-align: center;
-    margin-top:20px;
+    margin:0 10px;
+    font-weight: bold;
+    color:rgba(0, 0, 0,0.8)
 }
 .modal__body__page{
     width:40%;
@@ -36,6 +54,7 @@
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
+    overflow: hidden;
 }
 .modal__body__sign-in__header-title{
     flex:1;

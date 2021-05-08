@@ -30,7 +30,7 @@ const Home = () => {
                 url: `http://localhost:8080/api/products/${category}?page=${page}&type=${type}`,
                 method: 'get',
             });
-            if (category === 'laptop') {
+            if (category == 'laptop') {
                 switch (type) {
                     case 1:
                         setListProductKM(Data.listProducts); break;
@@ -45,12 +45,11 @@ const Home = () => {
             else
                 setListProductPK(Data.listProducts);
         }
-        getListProduct('laptop', 1, 1);
-        getListProduct('laptop', 1, 2);
-        getListProduct('laptop', 1, 3);
-        getListProduct('PK', 1, 1);
+        getListProduct('laptop', 1, 1)
+            .then(() => getListProduct('laptop', 1, 2))
+            .then(() => getListProduct('laptop', 1, 3))
+            .then(() => getListProduct('PK', 1, 1));
     }, [])
-    console.log(ListProductHot,ListProductKM,ListProductBC,ListProductPK)
     return (
         <div className="main">
             <div className="slide-home">
@@ -111,9 +110,9 @@ const Home = () => {
                             <h3 class="product-deal-hot-title">
                                 Laptop Mới Nhất Trong Tháng
                     </h3>
-                            <a href="../Trangsanpham/khuyenmai.html" class="product-hot-btn">
+                            <Link to="/Products/laptop" class="product-hot-btn">
                                 Xem tất cả <i class="fas fa-chevron-right"></i>
-                            </a>
+                            </Link>
                         </div>
                         <div class="row mx-4">
                             <div className="col-12">
