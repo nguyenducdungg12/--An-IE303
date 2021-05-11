@@ -17,7 +17,11 @@ export const closeLogin=()=>{
         type:types.CLOSE_MODAL_LOGIN
     }
 }
-
+export const showForgotPassword = ()=>{
+    return {
+        type : types.SHOW_FORGET_PASSWORD
+    }
+}
 export const addToCart=(product)=>{
     return{
         type:types.ADD_TO_CART,

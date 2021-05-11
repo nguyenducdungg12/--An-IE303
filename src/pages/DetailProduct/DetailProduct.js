@@ -21,7 +21,7 @@ function DetailProduct(props) {
     useEffect(() => {
         async function getProduct(){
             var data = await CallApi({
-                url : `http://localhost:8080/api/products/${id}`,
+                url : `http://localhost:8080/api/detailproducts/${id}`,
                 method : 'get'
             })
             console.log(1234,123);
@@ -38,7 +38,7 @@ function DetailProduct(props) {
     return (Product &&
         <div className="DetailProduct">
             <div className="container">
-                <Breadcum ListBreadcum={['Danh sach san pham']} final="Laptop MSI Modern 14 A10RB-888VN"/>
+                <Breadcum ListBreadcum={[Product.category]} final={Product.title}/>
                 <div className="row">
                     <DetailProductComponent Product = {Product} Notify={renderNotify}/>
                     <div class="col-lg-3 css-80">

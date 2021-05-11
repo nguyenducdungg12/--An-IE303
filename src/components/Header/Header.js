@@ -10,6 +10,7 @@ import icon2 from '../../assets/img/xk2s.png'
 import icon3 from '../../assets/img/xk3s.png'
 import icon4 from '../../assets/img/xk4s.png'
 import icon5 from '../../assets/img/xk5s.png'
+import transferPrice from '../../helper/TransferPrice'
 import laptop from '../../assets/img/xxx21.png'
 import * as actions from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,10 +40,9 @@ const Header = () => {
     function renderTotalMoney(){
         var total=0;
         if(product.length>0){
-            total=product[0].soluong*product[0].newprice;
-            if(product.length>2){
-                return product.reduce((a,b)=>(a.soluong*a.newprice)+(b.soluong*b.newprice));
-            }
+            product.forEach((item)=>{
+                total += item.soluong*item.newprice;
+            })
         }
         return total;
     }
@@ -60,7 +60,6 @@ const Header = () => {
         return result;
     }
     function onLogout(){
-        console.log(123);
         localStorage.removeItem("Authorization");
         dispatch(action.logOutUser());
     }
@@ -131,7 +130,7 @@ const Header = () => {
                                                 Tổng Tiền:
                                         </span>
                                             <span class="container-cart-total-pay__price">
-                                            {renderTotalMoney()}
+                                            {transferPrice(renderTotalMoney())}đ
                                         </span>
                                         </div>
                                     </div>

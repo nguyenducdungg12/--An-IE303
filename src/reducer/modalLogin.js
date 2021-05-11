@@ -8,6 +8,8 @@ const reducer = (state = initialState, action) => {
             return 1;
         case types.SHOW_MODAL_REGISTER:
             return 2;
+        case types.SHOW_FORGET_PASSWORD:
+            return 3;
         case types.CLOSE_MODAL_LOGIN:
             return 0;
         default:

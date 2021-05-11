@@ -5,6 +5,8 @@ import Footer from './components/Footer/Footer';
 import Products from './pages/Products/Products'
 import {Switch,Route,BrowserRouter as Router } from 'react-router-dom'
 import Home from "./pages/Home/Home"
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
+import ErrorPage from './pages/ErrorPage/Error'
 import DetailProduct from './pages/DetailProduct/DetailProduct'
 import Cart from './pages/Cart/Cart'
 import './App.css'
@@ -20,6 +22,8 @@ function App() {
               <Route path='/Products/:category' component={Products}></Route>
               <Route path='/DetailProduct/:id' component={DetailProduct}></Route>
               <Route path='/Cart' component={Cart}></Route>
+              <Route path='/Forgot/:id' component={ForgotPassword}/>
+              <Route component = {ErrorPage}/>
           </Switch> 
          <Footer></Footer> 
       <Modals></Modals>

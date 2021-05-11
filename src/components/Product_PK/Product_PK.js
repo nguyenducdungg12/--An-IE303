@@ -1,12 +1,13 @@
 import React from 'react'
 import bannerPK from '../../assets/img/bannerphukien.png'
-
+import {Link} from 'react-router-dom'
+import transferPrice from '../../helper/TransferPrice'
 
 function Product_PK_Item(props) {
-    const {image,title,oldprice,newprice} = props.data;
+    const {id,image,title,oldprice,newprice} = props.data;
     return (
         <div class="col-lg-3 p-0">
-        <a href="../Trangchitiet/chitietphukien.html" style={{ display: "block", textDecoration: "none" }} class="product-pk-item">
+        <Link to={`/DetailProduct/${id}`} style={{ display: "block", textDecoration: "none" }} class="product-pk-item">
             <img src={image} alt="" class="product-pk-img" />
             <div class="product-pk-item-desc">
                 <p class="product-pk-item-desc-title">
@@ -14,14 +15,14 @@ function Product_PK_Item(props) {
                                              </p>
                 <div class="product-pk-item-desc-price">
                     <span class="product-pk-item-desc-price-old">
-                        <span>{oldprice}đ</span> <span class='sale'>{parseInt((1-(newprice/oldprice))*100)}%</span>
+                        <span>{transferPrice(oldprice)}đ</span> <span class='sale'>{parseInt((1-(newprice/oldprice))*100)}%</span>
                     </span>
                     <span class="product-pk-item-desc-price-new">
-                   { newprice}đ
+                   { transferPrice(newprice)}đ
                  </span>
                 </div>
             </div>
-        </a>
+        </Link>
     </div>
     )
 }

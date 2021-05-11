@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './modals.css';
 import Login from './Login/login';
 import Register from './Register/register';
+import ForgotPassword from './ForgotPassword/ForgotPassword'
 import { useSelector, useDispatch } from 'react-redux';
 import { closeLogin } from './../../actions/index';
 
@@ -26,6 +27,7 @@ const Modals = () => {
                     <div class="modal__body__form__wrap">
                         <Login display={display} closeModal={closeModal}/>
                         <Register display={display} closeModal={closeModal}/>
+                        <ForgotPassword display={display} closeModal={closeModal}/>
                     </div>
                 </div>
             </div>

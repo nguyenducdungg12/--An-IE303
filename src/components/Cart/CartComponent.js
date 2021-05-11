@@ -5,6 +5,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from './../../actions/index';
 import { toast } from 'react-toastify';
+import transferPrice from '../../helper/TransferPrice'
 function CartItemComponent(props) {
     const {data}=props;
     const dispatch=useDispatch();
@@ -30,8 +31,8 @@ function CartItemComponent(props) {
                 </div>
             </div>
             <div class="cart__item-price">
-                <div class="cart__item-price-current">{data.newprice * data.soluong}đ</div>
-                <div class="cart__item-price-old">{data.oldprice * data.soluong}đ</div>
+                <div class="cart__item-price-current">{transferPrice(data.newprice * data.soluong)}đ</div>
+                <div class="cart__item-price-old">{transferPrice(data.oldprice * data.soluong)}đ</div>
             </div>
         </div>
     )
@@ -43,10 +44,9 @@ function CartComponent(props) {
     function renderTotalMoney(){
         var total=0;
         if(ListCart.length>0){
-            total=ListCart[0].soluong*ListCart[0].newprice;
-            if(ListCart.length>2){
-                return ListCart.reduce((a,b)=>(a.soluong*a.newprice)+(b.soluong*b.newprice));
-            }
+            ListCart.forEach((item)=>{
+                total += item.soluong*item.newprice;
+            })
         }
         return total;
     }
@@ -103,7 +103,7 @@ function CartComponent(props) {
                         <span class="cart-pay-text">Thanh toán(Đã bao gồm VAT)</span>
                         <div class="cart-pay-sum">
                             <span class="cart-pay-sum-a">Tạm tính</span>
-                            <span class="cart-pay-sum-money">{renderTotalMoney()}đ</span>
+                            <span class="cart-pay-sum-money">{transferPrice(renderTotalMoney())}đ</span>
                         </div>
                         <div class="cart-pay-transport">
                             <span class="cart-pay-transport-a">Phí vận chuyển</span>
@@ -111,11 +111,11 @@ function CartComponent(props) {
                         </div>
                         <div class="cart-pay-sale">
                             <span class="cart-pay-sale-a">Khuyến mãi</span>
-                            <span class="cart-pay-sale-money">0.000.000 đ</span>
+                            <span class="cart-pay-sale-money">0 đ</span>
                         </div>
                         <div class="cart-pay-check">
                             <span class="cart-pay-check-a">Thành tiền</span>
-                            <span class="cart-pay-check-money">{renderTotalMoney()+30000}</span>
+                            <span class="cart-pay-check-money">{transferPrice(renderTotalMoney()+30000)}</span>
                         </div>
                         <button class="cart-pay-btn-pay">
                             THANH TOÁN

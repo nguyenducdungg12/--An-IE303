@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Slider from "react-slick";
 import {Link} from 'react-router-dom'
+import transferPrice from '../../helper/TransferPrice'
 import './slideproduct.css';
 
 const NextSlide = (props) => {
@@ -12,19 +13,19 @@ const PrevSlide = (props) => {
     return <span class="product-deadl-hot-btn product-deadl-hot-btn-right" onClick={onClick}><i class="fas fa-chevron-right"></i></span>
 }
 const SlideProductItem = (props) => {
-    const { dataProduct } = props;
-    return <Link to={`./DetailProduct/${dataProduct.id}`}class="item product-deal-hot-item">
-        <img src={dataProduct.image} alt="" class="product-deadl-hot-img" />
+    const { oldprice,title,id,newprice,image} = props.dataProduct;
+    return <Link to={`./DetailProduct/${id}`}class="item product-deal-hot-item">
+        <img src={image} alt="" class="product-deadl-hot-img" />
         <div class="product-deal-hot-desc">
             <p class="product-deal-ho-namet">
-                {dataProduct.title}
+                {title}
         </p>
             <div class="product-deal-hot-price">
                 <span class="product-deadl-hot-price-old">
-                {dataProduct.oldprice}đ
+                {transferPrice(oldprice)}đ
             </span>
                 <span class="product-deadl-hot-price-new">
-                {dataProduct.newprice}đ
+                {transferPrice(newprice)}đ
             </span>
             </div>
         </div>

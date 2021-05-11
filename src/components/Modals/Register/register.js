@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axiosClient from '../../../helper/axiosClient';
 import * as actions from './../../../actions/index';
 import { useDispatch } from 'react-redux';
@@ -10,6 +10,9 @@ Register.propTypes = {
 function Register(props) {
     const dispatch=useDispatch();
     const { display, closeModal } = props;
+    useEffect(() => {
+       clearForm();
+    },[display])
     const [valueForm, setvalueForm] = useState(
         {
             username: null,
@@ -44,14 +47,16 @@ function Register(props) {
                 phone: data.phone
             }
         });
+        console.log(123,Data);
         if(Data.statusCode==200){
             toast.success(Data.msg);
             toast.success("Truy cập vào Email để kích hoạt tài khoản");
             closeModal();
             clearForm();
         }
-        else 
-            toast.error("Tên tài khoản có người sử dụng");
+        else{
+            toast.error(Data.msg);
+        }
     }
     function validateForm(){
         if (valueForm.username.length<=5){
@@ -77,6 +82,9 @@ function Register(props) {
             regiterUser(valueForm);
         }
     }
+    function onClickForgotPassword(){
+        dispatch(actions.showForgotPassword());
+    }
     return (
         <form style={display == 2 ? { display: "block" } : { display: "none" }} onSubmit={onSubmitRegister}>
             <div class="modal-main__title--container">
@@ -94,8 +102,8 @@ function Register(props) {
                 <input type="email" class="modal__body__sign-in__form-input" name="email" value={valueForm.email} required placeholder="Nhập Email" onChange={onChangeForm} />
                 <input type="text" class="modal__body__sign-in__form-input" name="phone" value={valueForm.phone} required placeholder="Nhập Số Điện Thoại" onChange={onChangeForm} />
                 <div class="modal__body__sign-in__form-support">
-                    <a href="#" class="modal__body__sign-in__form-helps__forget">Quên Mật Khẩu</a>
-                    <a href="" class="modal__body__sign-in__form-helps__help">Cần Trợ giúp?</a>
+                <span  class="modal__body__sign-in__form-helps__forget" onClick={onClickForgotPassword}>Quên Mật Khẩu</span>
+                    <span class="modal__body__sign-in__form-helps__help">Cần Trợ giúp?</span>
                 </div>
                 <div class="modal__body__sign-in__form-button">
                     <button class="modol__body__sign-in__form-button-back" onClick={closeModal}>

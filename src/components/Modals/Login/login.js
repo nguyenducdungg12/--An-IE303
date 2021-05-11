@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axiosClient from '../../../helper/axiosClient';
 import { toast } from 'react-toastify';
 import * as actions from '../../../actions/index';
@@ -8,6 +8,9 @@ import * as action from '../../../actions/user'
 const Login = (props) => {
     const { display, closeModal } = props;
     const dispatch = useDispatch();
+    useEffect(() => {
+        clearForm();
+     },[display])
     const [valueForm, setvalueForm] = useState(
         {
             username: null,
@@ -49,6 +52,9 @@ const Login = (props) => {
         e.preventDefault();
         loginUser(valueForm);
     }
+    function onClickForgotPassword(){
+        dispatch(actions.showForgotPassword());
+    }
     return (
         <form style={display == 1 ? { display: "block" } : { display: "none" }} onSubmit={onSubmitLogin}>
             <div class="modal-main__title--container">
@@ -63,8 +69,8 @@ const Login = (props) => {
                 <input type="text" class="modal__body__sign-in__form-input" name="username" value={valueForm.username} placeholder="Tên Tài Khoản" onChange={onChangeForm}/>
                 <input type="password" class="modal__body__sign-in__form-input" name="password" value={valueForm.password} placeholder="Mật Khẩu" onChange={onChangeForm}/>
                 <div class="modal__body__sign-in__form-support">
-                    <a href="#" class="modal__body__sign-in__form-helps__forget">Quên Mật Khẩu</a>
-                    <a href="" class="modal__body__sign-in__form-helps__help">Cần Trợ giúp?</a>
+                    <span  class="modal__body__sign-in__form-helps__forget" onClick={onClickForgotPassword}>Quên Mật Khẩu</span>
+                    <span class="modal__body__sign-in__form-helps__help">Cần Trợ giúp?</span>
                 </div>
                 <div class="modal__body__sign-in__form-button">
                     <button class="modol__body__sign-in__form-button-back" onClick={closeModal}>

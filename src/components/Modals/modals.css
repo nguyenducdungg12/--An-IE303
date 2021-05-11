@@ -94,6 +94,7 @@
 .modal__body__sign-in__form-support{
     text-align: end;
     margin-bottom: 60px;
+
 }
 .modal__body__sign-in__form-helps__forget{
     display: inline-block;
@@ -102,6 +103,7 @@
     font-size: 500;
     padding-right: 10px;
     border-right: 1px solid #c4c3c3;
+    cursor: pointer;
 }
 .modal__body__sign-in__form-helps__forget:hover{
     color:rgb(20, 53, 195);
@@ -109,6 +111,7 @@
 .modal__body__sign-in__form-helps__help{
     font-size: 13px;
     display:inline-block;
+    cursor: pointer;
     color:#7c7c7c;
     margin-left: 10px;
 }

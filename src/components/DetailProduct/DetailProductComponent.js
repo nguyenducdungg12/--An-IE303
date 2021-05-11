@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
+import transferPrice from '../../helper/TransferPrice'
 import * as actions from './../../actions/index';
 function DetailProductComponent(props) {
     const { Product } = props;
@@ -81,13 +82,13 @@ function DetailProductComponent(props) {
                         <div className="css-6 css-1002">
                             <h1 className="css-7">{Product.title}</h1>
                             <h6 className="css-8">Thương hiệu <span className="css-12">MSI</span> <span className="css-1001"></span>  {`SKU:${Product.id}`} </h6>
-                            <h1 className="css-10">{Product.newprice}</h1>
+                            <h1 className="css-10">{transferPrice(Product.newprice)}đ</h1>
                         </div>
                         <div className="css-30 css-1002">
                             <div className="css-31">Chọn thêm 1 trong những khuyến mãi sau</div>
                             <div className="css-32">
-                                <div className="css-33">Giá: <span>21.990.000đ</span> </div>
-                                <div className="css-34">Đã giảm thêm <span>2.000.000đ</span> </div>
+                                <div className="css-33">Giá: <span>{transferPrice(Product.oldprice-2000000)}đ</span> </div>
+                                <div className="css-34">Đã giảm thêm <span>2.000.000đ</span> </div> 
                             </div>
                             <div className="css-35">
                                 <div className="css-36"> <Link to="../Trangsanpham/giohang.html" className="css-39">Mua ngay</Link> </div>
