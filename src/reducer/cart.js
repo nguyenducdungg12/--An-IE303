@@ -41,6 +41,9 @@ const reducer = (state = initialState, action) => {
             }
             localStorage.setItem('Product', JSON.stringify([...state]));
             return [...state];
+        case types.DELETE_ALL_CART_ITEM:
+            localStorage.removeItem('Product');
+            return [];
         default:
             return state;
     }

@@ -25,7 +25,9 @@ function ForgotPassword(props) {
             AxiosClient({
                 url : `http://localhost:8080/api/auth/forgot/${id}`,
                 method:'post',
-                data : value.password,
+                data : {
+                    password : value.password,
+                }
             }).then(data=>{
                 if(data.status!=200){
                     toast.error("Đổi mật khẩu không thành công");

@@ -8,6 +8,7 @@ import Home from "./pages/Home/Home"
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import ErrorPage from './pages/ErrorPage/Error'
 import DetailProduct from './pages/DetailProduct/DetailProduct'
+import CheckoutPage from './pages/Checkout/Checkout'
 import Cart from './pages/Cart/Cart'
 import './App.css'
 import { ToastContainer, toast } from 'react-toastify';
@@ -23,6 +24,7 @@ function App() {
               <Route path='/DetailProduct/:id' component={DetailProduct}></Route>
               <Route path='/Cart' component={Cart}></Route>
               <Route path='/Forgot/:id' component={ForgotPassword}/>
+              <Route path='/Checkout' component = {CheckoutPage}/>
               <Route component = {ErrorPage}/>
           </Switch> 
          <Footer></Footer> 

@@ -5,6 +5,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from './../../actions/index';
 import { toast } from 'react-toastify';
+import {useHistory} from 'react-router-dom'
 import transferPrice from '../../helper/TransferPrice'
 function CartItemComponent(props) {
     const {data}=props;
@@ -41,6 +42,8 @@ function CartItemComponent(props) {
 function CartComponent(props) {
     const ListCart=useSelector(state=>state.cart);
     const dispatch=useDispatch();
+    const user = useSelector(state => state.user)
+    const history = useHistory();
     function renderTotalMoney(){
         var total=0;
         if(ListCart.length>0){
@@ -59,9 +62,7 @@ function CartComponent(props) {
                     {
                         label: 'Yes',
                         onClick: () => {
-                            for(let i=0;i<ListCart.length;i++){
-                                dispatch(actions.deleteCartItem(ListCart[i]));
-                            }
+                                dispatch(actions.deleteAllCart());
                             toast.error("Xóa tất cả sản phẩm thành công");
                         }
                     },
@@ -76,6 +77,13 @@ function CartComponent(props) {
         else
             content = (<CartEmpty></CartEmpty>);
         return content;
+    }
+    function onClickCheckOut(){
+        if(!user){
+            toast.error("Vui lòng đăng nhập để thanh toán");
+            return;
+        }
+        history.push('/checkout');
     }
     return (
         <div>
@@ -117,9 +125,9 @@ function CartComponent(props) {
                             <span class="cart-pay-check-a">Thành tiền</span>
                             <span class="cart-pay-check-money">{transferPrice(renderTotalMoney()+30000)}</span>
                         </div>
-                        <button class="cart-pay-btn-pay">
+                        <button class="cart-pay-btn-pay btn-disable" onClick = {onClickCheckOut}>
                             THANH TOÁN
-                                    <div class="cart-pay-btn-pay__title">Bạn cần đăng nhập để tiếp tục</div>
+                                    {!user&&<div class="cart-pay-btn-pay__title">Bạn cần đăng nhập để tiếp tục</div>}
                         </button>
                     </div>
                 </div>

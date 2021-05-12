@@ -130,7 +130,7 @@ const Header = () => {
                                                 Tổng Tiền:
                                         </span>
                                             <span class="container-cart-total-pay__price">
-                                            {transferPrice(renderTotalMoney())}đ
+                                            {transferPrice(renderTotalMoney())}
                                         </span>
                                         </div>
                                     </div>

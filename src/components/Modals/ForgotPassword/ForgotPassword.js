@@ -19,9 +19,16 @@ function Register(props) {
         axiosClient({
             url:`http://localhost:8080/api/auth/forgot`,
             method:"post",
-            data : Email,
+            data : {
+                email : Email,
+            },
         }).then(data=>{
-            console.log(data);
+            if(data.status==200){
+                toast.success(data.msg);
+            }
+            else{
+                toast.error(data.msg);
+            }
         });
     }
     return (
