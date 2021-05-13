@@ -24,7 +24,7 @@ function App() {
               <Route path='/DetailProduct/:id' component={DetailProduct}></Route>
               <Route path='/Cart' component={Cart}></Route>
               <Route path='/Forgot/:id' component={ForgotPassword}/>
-              <Route path='/Checkout' component = {CheckoutPage}/>
+              <Route path='/checkout' component = {CheckoutPage}/>
               <Route component = {ErrorPage}/>
           </Switch> 
          <Footer></Footer> 

@@ -1,44 +1,54 @@
-import React,{useState} from 'react'
-import Breadcum from '../../components/Breadcum/Breadcum'
-function Checkout() {
-    const [formdelivery, setformdelivery] = useState(null);
-    const [edit, setedit] = useState(null);
-    function handleForm(data,keylocal){
-        setformdelivery(
-            {
-                form:data,
-                key:keylocal
-            });
-        setedit(null);
+import React from 'react'
+
+function Checkout(props) {
+    const {formData,edit} =props;
+    function onHandleEdit() {
+        edit();
     }
-    function handleEdit(){
-        setedit(formdelivery);
-        setformdelivery(null);
-    }
-    console.log(formdelivery);
-    function renderForm(){
-        if(formdelivery){
-            return <DeliveryAddress formData={formdelivery.form} edit={handleEdit}></DeliveryAddress>
-        }
-        return <PaymentInfo handleForm={handleForm} edit={edit}></PaymentInfo>
+    function onHandleSpecificEdit(){
+
     }
     return (
-        <div className="cart-home">
-        <div className="container">
-            <Breadcum final={"Thanh toán"} />
-            <div class="grid__row grid__row-1">
-                <div class="grid__column-8">
-                    {renderForm()}
-                    <CartComponent />
-                </div>
-                <div class="grid__column-4">
-                    <Discount></Discount>
-                    <PaymentComponent></PaymentComponent>
-                    <PaymentChoosing></PaymentChoosing>
+        <div className="cart__cupon payment__info">
+                <h2 className="cart__cupon-qr payment__info-qr">Địa chỉ nhận hàng</h2>
+                <div className="payment__address">
+                    <div>
+                        <div className="payment__form__address">
+                            <i class="fas fa-file-signature"></i>
+                            <span className="payment__form__title">Tên :</span>
+                            <span className="payment__form__content">{formData.name}</span>
+                            {/* <i class="far fa-edit payment__form__address__edit-icon" onClick={onHandleSpecificEdit}></i> */}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="payment__form__address">
+                            <i class="fas fa-phone"></i>
+                            <span className="payment__form__title">Số điện thoại:</span>
+                            <span className="payment__form__content">{formData.phone}</span>
+                            {/* <i class="far fa-edit payment__form__address__edit-icon" onClick={onHandleSpecificEdit}></i> */}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="payment__form__address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span className="payment__form__title">Địa chỉ nhận hàng:</span>
+                            <span className="payment__form__content">{formData.diachi}</span>
+                            {/* <i class="far fa-edit payment__form__address__edit-icon" onClick={onHandleSpecificEdit}></i> */}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="payment__form__address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span className="payment__form__title">Nơi ở:</span>
+                            <span className="payment__form__content">{formData.phuongxa},{formData.quanhuyen},{formData.thanhpho}</span>
+                            {/* <i class="far fa-edit payment__form__address__edit-icon " onClick={onHandleSpecificEdit}></i> */}
+                        </div>
+                    </div>
+                    <div className="payment__form__address__btn">
+                        <button className="payment__btn__submit" onClick={onHandleEdit}>Chỉnh sửa</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
     )
 }
 
