@@ -1,54 +1,161 @@
-import React from 'react'
-
-function Checkout(props) {
-    const {formData,edit} =props;
-    function onHandleEdit() {
-        edit();
+import React,{useEffect,useState} from 'react'
+import Local from '../../assets/img/local.json'
+import './Checkout.css'
+import {useHistory} from 'react-router-dom'
+import {useSelector,useDispatch} from 'react-redux'
+import *as action from '../../actions/index'
+import AxiosClient from '../../helper/axiosClient'
+import { toast } from 'react-toastify';
+function Checkout() {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const cart = useSelector(state => state.cart);
+    const [formPayment, setformPayment] = useState({
+        thanhpho: "",
+        quanhuyen: "",
+        phuongxa: "",
+        sonha:"",
+        payment:0
+    });
+    const [keylocal, setkeylocal] = useState({
+        city: null,
+        district: null
+    });
+    function onHandleChange(e) {
+        setformPayment({
+            ...formPayment,
+            [e.target.name]: e.target.value
+        })
+        if (e.target.name == "thanhpho") {
+            setkeylocal({
+                ...keylocal,
+                city: parseInt(e.target[e.target.selectedIndex].getAttribute("data-id"))
+            })
+        }
+        else if (e.target.name == "quanhuyen") {
+            setkeylocal({
+                ...keylocal,
+                district: parseInt(e.target[e.target.selectedIndex].getAttribute("data-id"))
+            })
+        }
     }
-    function onHandleSpecificEdit(){
-
+    function handlingFormCity() {
+        var result = null;
+        result = Local.map((city, index) => {
+            return <option value={city.name} data-id={index} key={index}>{city.name}</option>
+        })
+        return result;
     }
+    function handlingFormDistrict() {
+        var result = null;
+        if (keylocal.city != null) {
+            result = Local[keylocal.city].districts.map((district, index) => {
+                return <option value={district.name} data-id={index} key={index}>{district.name}</option>
+            })
+        }
+        return result;
+    }
+    function handlingFormWards() {
+        var result = null;
+        if (keylocal.district != null) {
+            result = Local[keylocal.city].districts[keylocal.district].wards.map((district, index) => {
+                return <option value={district.name} data-id={index} key={index}>{district.name}</option>
+            })
+        }
+        return result;
+    }
+    function renderAddress(){
+        return `${formPayment.sonha}-${formPayment.phuongxa}-${formPayment.quanhuyen}-${formPayment.thanhpho} `
+    }
+    function onHandleSubmit(e){
+
+        e.preventDefault();
+        AxiosClient({
+            url : 'http://localhost:8080/api/auth/order',
+            method : 'post',
+            data : {
+                adress : renderAddress(),
+                products : cart,
+                payment : formPayment.payment,
+            }
+        }).then(data=>{
+
+            if(data.statusCode==200){
+                toast.success(data.msg);
+                dispatch(action.deleteAllCart());
+                history.push('/');
+            }
+            else{
+                toast.erorr(data.msg);
+                history.push('/');
+
+            }
+        })
+    }
+    console.log(renderAddress())
     return (
+        <div className="container ">
         <div className="cart__cupon payment__info">
-                <h2 className="cart__cupon-qr payment__info-qr">Địa chỉ nhận hàng</h2>
-                <div className="payment__address">
-                    <div>
-                        <div className="payment__form__address">
-                            <i class="fas fa-file-signature"></i>
-                            <span className="payment__form__title">Tên :</span>
-                            <span className="payment__form__content">{formData.name}</span>
-                            {/* <i class="far fa-edit payment__form__address__edit-icon" onClick={onHandleSpecificEdit}></i> */}
+            <h2 className="cart__cupon-qr text-center">Thông tin thanh toán</h2>
+            <form className="payment__form" onSubmit={onHandleSubmit}>
+                <div className="row justify-content-center">
+                    <div className="col-lg-8 text-center">
+                        
+                        <h3 className="payment__form__title my-4">Tỉnh/Thành phố</h3>
+                        <select className="cart__cupon-type-input payment__form--input"
+                            // options={formPayment.thanhpho}
+                            onChange={onHandleChange}
+                            name="thanhpho"
+                            value={formPayment.thanhpho}
+                            required
+                        >
+                            <option disabled selected value="">Tỉnh/Thành phố</option>
+                            {handlingFormCity()}
+                        </select>
+                        <h3 className="payment__form__title my-4">Quận/Huyện</h3>
+                        <select className="cart__cupon-type-input payment__form--input" disabled={formPayment.thanhpho == "" ? 'disabled' : null}
+                            // options={formPayment.quanhuyen}
+                            value={formPayment.quanhuyen}
+                            onChange={onHandleChange}
+                            name="quanhuyen"
+                            required
+                        >
+                            <option disabled selected value=""> Quận/Huyện</option>
+                            {handlingFormDistrict()}
+                        </select>
+                        <h3 className="payment__form__title my-4">Phường/Xã</h3>
+                        <select className="cart__cupon-type-input payment__form--input" disabled={formPayment.quanhuyen == "" ? 'disabled' : null}
+                            // options={formPayment.phuongxa}
+                            value={formPayment.phuongxa}
+                            onChange={onHandleChange}
+                            name="phuongxa"
+                            required
+                        >
+                            <option disabled selected value=""> Phường/Xã</option>
+                            {handlingFormWards()}
+                        </select>
+                        <h3 className="payment__form__title my-4">Ấp/Số Nhà/Tên Đường</h3>
+                        <textarea className='cart__cupon-type-input payment__form--input'name="sonha" id="" cols="30" rows="5" onChange={onHandleChange} placeholder="địa chỉ cụ thể: ấp, số nhà, tên đường"></textarea>
+                        <h3 className="payment__form__title my-4" >Chọn phương thức thanh toán</h3>
+                        <select className="cart__cupon-type-input payment__form--input" disabled={formPayment.quanhuyen == "" ? 'disabled' : null}
+                            // options={formPayment.phuongxa}
+                            value={formPayment.payment}
+                            onChange={onHandleChange}
+                            name="payment"
+                            required
+                        >
+                            <option disabled selected value="" > Chọn phương thức thanh toán</option>
+                            <option  value="1">Thanh toán khi nhận hàng</option>
+                            <option  value="2"> Thanh toán bằng card</option>
+                        </select>
+                        <div className="btn__payment_contain">
+                            <button className="payment__btn__submit" type="submit">Thanh toán</button>
                         </div>
-                    </div>
-                    <div>
-                        <div className="payment__form__address">
-                            <i class="fas fa-phone"></i>
-                            <span className="payment__form__title">Số điện thoại:</span>
-                            <span className="payment__form__content">{formData.phone}</span>
-                            {/* <i class="far fa-edit payment__form__address__edit-icon" onClick={onHandleSpecificEdit}></i> */}
-                        </div>
-                    </div>
-                    <div>
-                        <div className="payment__form__address">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span className="payment__form__title">Địa chỉ nhận hàng:</span>
-                            <span className="payment__form__content">{formData.diachi}</span>
-                            {/* <i class="far fa-edit payment__form__address__edit-icon" onClick={onHandleSpecificEdit}></i> */}
-                        </div>
-                    </div>
-                    <div>
-                        <div className="payment__form__address">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span className="payment__form__title">Nơi ở:</span>
-                            <span className="payment__form__content">{formData.phuongxa},{formData.quanhuyen},{formData.thanhpho}</span>
-                            {/* <i class="far fa-edit payment__form__address__edit-icon " onClick={onHandleSpecificEdit}></i> */}
-                        </div>
-                    </div>
-                    <div className="payment__form__address__btn">
-                        <button className="payment__btn__submit" onClick={onHandleEdit}>Chỉnh sửa</button>
                     </div>
                 </div>
-            </div>
+            </form>
+        </div>
+        </div>
     )
 }
 

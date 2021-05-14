@@ -9,9 +9,11 @@ import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import ErrorPage from './pages/ErrorPage/Error'
 import DetailProduct from './pages/DetailProduct/DetailProduct'
 import CheckoutPage from './pages/Checkout/Checkout'
+import OrderPage from './pages/Order/Order'
 import Cart from './pages/Cart/Cart'
+import 'antd/dist/antd.css'
 import './App.css'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
               <Route path='/DetailProduct/:id' component={DetailProduct}></Route>
               <Route path='/Cart' component={Cart}></Route>
               <Route path='/Forgot/:id' component={ForgotPassword}/>
+              <Route path='/user/order' component={OrderPage}/>
               <Route path='/checkout' component = {CheckoutPage}/>
               <Route component = {ErrorPage}/>
           </Switch> 

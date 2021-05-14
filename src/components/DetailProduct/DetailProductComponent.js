@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import transferPrice from '../../helper/TransferPrice'
 import * as actions from './../../actions/index';
+
 function DetailProductComponent(props) {
     const { Product } = props;
+    const history = useHistory();
     const dispatch=useDispatch();
+    function onClickBuy(){
+       dispatch(actions.addToCart(Product));
+         history.push('/cart');
+      }
     return (
         <div className="col-lg-9 css-11">
             <div className="css-90">
@@ -91,7 +97,7 @@ function DetailProductComponent(props) {
                                 <div className="css-34">Đã giảm thêm <span>2.000.000đ</span> </div> 
                             </div>
                             <div className="css-35">
-                                <div className="css-36"> <Link to="../Trangsanpham/giohang.html" className="css-39">Mua ngay</Link> </div>
+                                <div className="css-36"> <div onClick={onClickBuy} className="css-39">Mua ngay</div> </div>
                                 <div className="css-37"> <div className="css-39 css-40" onClick={() => {toast.success("Thêm giỏ hàng thành công");dispatch(actions.addToCart(Product));}}>Thêm vào giỏ hàng</div></div>
                             </div>
                         </div>

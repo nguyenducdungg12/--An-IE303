@@ -85,6 +85,7 @@ function CartComponent(props) {
         }
         history.push('/checkout');
     }
+    console.log(ListCart);
     return (
         <div>
             <div class="grid__row">
@@ -126,7 +127,7 @@ function CartComponent(props) {
                             <span class="cart-pay-check-money">{transferPrice(renderTotalMoney()+30000)}</span>
                         </div>
                         <button class="cart-pay-btn-pay btn-disable" onClick = {onClickCheckOut}>
-                            THANH TOÁN
+                            TIẾN HÀNH THANH TOÁN
                                     {!user&&<div class="cart-pay-btn-pay__title">Bạn cần đăng nhập để tiếp tục</div>}
                         </button>
                     </div>

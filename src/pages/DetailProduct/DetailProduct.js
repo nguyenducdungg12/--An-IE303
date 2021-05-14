@@ -24,7 +24,6 @@ function DetailProduct(props) {
                 url : `http://localhost:8080/api/detailproducts/${id}`,
                 method : 'get'
             })
-            console.log(1234,123);
             setProduct(data);
         }   
         getProduct();
