@@ -46,6 +46,7 @@ const Header = () => {
         }
         return total;
     }
+    console.log(user);
     function renderCartItem(){
         var result=null;
         if(product&&product.length>0){
@@ -92,7 +93,7 @@ const Header = () => {
                                         <Link to='/user/order'className="header__user__dropdown--link">
                                             Quản lý đơn hàng
                                         </Link>
-                                        <Link to='user/setting' className="header__user__dropdown--link">
+                                        <Link to='/user/profile' className="header__user__dropdown--link">
                                             Hồ Sơ
                                         </Link>
                                         {

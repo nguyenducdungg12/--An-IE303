@@ -10,6 +10,7 @@ import ErrorPage from './pages/ErrorPage/Error'
 import DetailProduct from './pages/DetailProduct/DetailProduct'
 import CheckoutPage from './pages/Checkout/Checkout'
 import OrderPage from './pages/Order/Order'
+import Profile from './pages/Profile/Profile'
 import Cart from './pages/Cart/Cart'
 import 'antd/dist/antd.css'
 import './App.css'
@@ -28,6 +29,7 @@ function App() {
               <Route path='/Forgot/:id' component={ForgotPassword}/>
               <Route path='/user/order' component={OrderPage}/>
               <Route path='/checkout' component = {CheckoutPage}/>
+              <Route path='/user/profile' component = {Profile}/>
               <Route component = {ErrorPage}/>
           </Switch> 
          <Footer></Footer> 

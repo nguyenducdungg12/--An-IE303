@@ -23,13 +23,7 @@ function Comment() {
                     <input type="text" placeholder="Tìm theo nội dung, người gửi, ...." class="comment-question__search-input"/>
                 </div>
             </div>
-            <div class="comment-question__sort">
-                <div class="comment-question__sort-text">Sắp xếp theo</div>
-                <input type="radio" id="male" name="gender" value="Độ chính xác" class="comment-question__sort-check"/>
-                <label for="male" class="comment-question__sort-lable">Độ chính xác</label>
-                <input type="radio" id="female" name="gender" value="Mới nhất" class="comment-question__sort-check"/>
-                <label for="female" class="comment-question__sort-lable">Mới nhất</label>
-            </div>
+           
             <div class="comment-question__main">
                 <div class="comment-question__main-name">
                     <div class="comment-question__main-name-icon">T</div>

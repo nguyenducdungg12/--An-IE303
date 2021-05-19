@@ -116,7 +116,7 @@ function DetailProduct(props) {
                 </div>
                 <div className="row">
                     <div className="col-lg-12">
-                        <FeedbackStar/>
+                        {/* <FeedbackStar/> */}
                         <Comment/>
                     </div>
                 </div>

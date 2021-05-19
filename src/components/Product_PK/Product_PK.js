@@ -26,62 +26,8 @@ function Product_PK_Item(props) {
     </div>
     )
 }
-
-
-
 function Product_PK(props) {
     const {ListProduct} = props;
-    /* const data = [
-        {
-            image:"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-            title:"dsadsa",
-            oldPrice:'dsadadsa',
-            newPrice:123
-        },
-        {
-            image:"https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-            title:"dsadsa",
-            oldPrice:'dsadadsa',
-            newPrice:123
-        },
-        {
-            image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-            title:"dsadsa",
-            oldPrice:'dsadadsa',
-            newPrice:123
-        },
-        {
-            image:"https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
-            title:"dsadsa",
-            oldPrice:'dsadadsa',
-            newPrice:123
-        },
-        {
-            image:"https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
-            title:"dsadsa",
-            oldPrice:'dsadadsa',
-            newPrice:123
-        },
-        {
-            image:"https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
-            title:"dsadsa",
-            oldPrice:'dsadadsa',
-            newPrice:123
-        },
-        {
-            image:"https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
-            title:"dsadsa",
-            oldPrice:'dsadadsa',
-            newPrice:123
-        },
-        {
-            image:"https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg",
-            title:"dsadsa",
-            oldPrice:'dsadadsa',
-            newPrice:123
-        }, */
-     
-    
     function render(ListProduct){
         var content=[];
         if(ListProduct){
@@ -98,7 +44,7 @@ function Product_PK(props) {
                         {render(ListProduct)}
                     </div>
                         <div class='product-pk-link'>
-                            <a href="../Trangsanpham/phukien.html" class="product-pk-btn">Xem Tiếp</a>
+                            <Link to="/Products/PK" class="product-pk-btn">Xem Tiếp</Link>
                         </div>
                 </div>
             </div>

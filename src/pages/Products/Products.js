@@ -6,12 +6,15 @@ import ProductItem from './../../components/Products/ProductItem';
 import Pagination from '../../components/Pagination/Pagination';
 import { useLocation } from 'react-router-dom'
 import CallApi from '../../helper/axiosClient'
-import TransferPrice from '../../helper/TransferPrice'
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 const Products = (props) => {
-    console.log(props);
+    const [option, setoption] = useState({
+        sort:null,
+        max:null,
+        min:null,
+    })
     const [ListProduct, setListProduct] = useState(null);
     const [totalPage, settotalPage] = useState(null);
     const query = useQuery();
@@ -19,18 +22,19 @@ const Products = (props) => {
     const { category } = props.match.params;
     const type = query.get("type") || 1;
     const value=query.get("q")||null;
+    
     useEffect(() => {
         const getProduct = async () => {
             var Data;
             if (category =="search") {
                 Data = await CallApi({
-                    url: `http://localhost:8080/api/products?search=${value}`,
+                    url: `http://localhost:8080/api/products?search=${value}${option.sort ? "&sort=" + option.sort : ""}${option.max ? "&max=" + option.max : ""}${option.min ? "&min=" + option.min : ""}`,
                     method: 'get',
                 });
             }
             else {
                 Data = await CallApi({
-                    url: `http://localhost:8080/api/products/${category}?${page ? "page=" + page : ""}&${type ? "type=" + type : ""}`,
+                    url: `http://localhost:8080/api/products/${category}?${page ? "page=" + page : ""}&${type ? "type=" + type : ""}${option.sort ? "&sort=" + option.sort : ""}${option.max ? "&max=" + option.max : ""}${option.min ? "&min=" + option.min : ""}`,
                     method: 'get',
                 });
             }
@@ -38,7 +42,7 @@ const Products = (props) => {
             settotalPage(Data.totalPage);
         }
         getProduct();
-    },[props.location])
+    },[props.location,option])
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -46,6 +50,14 @@ const Products = (props) => {
         });
 
     })
+    function changeOption ({max,min,sort}){
+        setoption({
+            ...option,
+            max,
+            min,
+            sort,
+        })
+    }
     function handleRenderItem(ListProduct) {
         var result = [];
         if (ListProduct) {
@@ -57,7 +69,7 @@ const Products = (props) => {
         <div class="body">
             <div class="grid">
                 <Breadcum final="Laptop"></Breadcum>
-                <ProductSort category={category} type={type} search={value}></ProductSort>
+                <ProductSort category={category} type={type} search={value} changeOption ={changeOption}></ProductSort>
             </div>
             <div class="home-product">
                 <div class="grid">
