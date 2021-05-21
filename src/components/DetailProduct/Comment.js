@@ -182,13 +182,14 @@ function Comment(props) {
     function renderComment(comment) {
         var temp = [];
         if (comment && comment.data != "") {
-            temp = comment.map((item, stt) => <CommentItem key={stt} datakey={stt} isRenderComments ={isRenderComments} id={id} comment={item} />);
+            temp = comment.listComment.map((item, stt) => <CommentItem key={stt} datakey={stt} isRenderComments ={isRenderComments} id={id} comment={item} />);
         }
         return temp;
     }
     function countAverageStar(listComment) {
         var count = 0;
         if (listComment && listComment.data != "") {
+            console.log(listComment);
             listComment.forEach(ele => {
                 count += ele.start;
             });
@@ -220,48 +221,48 @@ function Comment(props) {
                                     5 <i class="fas fa-star"></i>
                                 </span>
                                 <div class="css-129">
-                                    <div class="css-802" style={{ width: `${(countFeedback(5, listComment) * 100 / listComment.length) || 0}%` }}></div>
+                                    <div class="css-802" style={{ width: `${(countFeedback(5, listComment.listComment) * 100 / listComment.listComment.length) || 0}%` }}></div>
 
                                 </div>
-                                <span class="css-130">{countFeedback(5, listComment)} đánh giá</span>
+                                <span class="css-130">{countFeedback(5, listComment.listComment)} đánh giá</span>
                             </li>
                             <li class="css-128">
                                 <span class="css-800">
                                     4 <i class="fas fa-star"></i>
                                 </span>
                                 <div class="css-129">
-                                    <div class="css-802" style={{ width: `${(countFeedback(4, listComment) * 100 / listComment.length) || 0}%` }}></div>
+                                    <div class="css-802" style={{ width: `${(countFeedback(4, listComment.listComment) * 100 / listComment.listComment.length) || 0}%` }}></div>
                                 </div>
-                                <span class="css-130 have-rating">{countFeedback(4, listComment)} đánh giá</span>
+                                <span class="css-130 have-rating">{countFeedback(4, listComment.listComment)} đánh giá</span>
                             </li>
                             <li class="css-128">
                                 <span class="css-800">
                                     3 <i class="fas fa-star"></i>
                                 </span>
                                 <div class="css-129">
-                                    <div class="css-802" style={{ width: `${(countFeedback(3, listComment) * 100 / listComment.length) || 0}%` }}></div>
+                                    <div class="css-802" style={{ width: `${(countFeedback(3, listComment.listComment) * 100 / listComment.listComment.length) || 0}%` }}></div>
 
                                 </div>
-                                <span class="css-130">{countFeedback(3, listComment)} đánh giá</span>
+                                <span class="css-130">{countFeedback(3, listComment.listComment)} đánh giá</span>
                             </li>
                             <li class="css-128">
                                 <span class="css-800">
                                     2 <i class="fas fa-star"></i>
                                 </span>
                                 <div class="css-129">
-                                    <div class="css-802" style={{ width: `${(countFeedback(2, listComment) * 100 / listComment.length) || 0}%` }}></div>
+                                    <div class="css-802" style={{ width: `${(countFeedback(2, listComment.listComment) * 100 / listComment.listComment.length) || 0}%` }}></div>
 
                                 </div>
-                                <span class="css-130">{countFeedback(2, listComment)} đánh giá</span>
+                                <span class="css-130">{countFeedback(2, listComment.listComment)} đánh giá</span>
                             </li>
                             <li class="css-128">
                                 <span class="css-800">
                                     1 <i class="fas fa-star"></i>
                                 </span>
                                 <div class="css-129">
-                                    <div class="css-802" style={{ width: `${(countFeedback(1, listComment) * 100 / listComment.length) || 0}%` }}></div>
+                                    <div class="css-802" style={{ width: `${(countFeedback(1, listComment.listComment) * 100 / listComment.listComment.length) || 0}%` }}></div>
                                 </div>
-                                <span class="css-130 have-rating">{countFeedback(1, listComment)} đánh giá</span>
+                                <span class="css-130 have-rating">{countFeedback(1, listComment.listComment)} đánh giá</span>
                             </li>
                         </ul>
                     </div>
@@ -270,11 +271,11 @@ function Comment(props) {
                             ĐÁNH GIÁ TRUNG BÌNH
                             </h2>
                         <div className="feedback-statistic-number">
-                            <span>{countAverageStar(listComment) || 0}</span>/<span>5</span>
+                            <span>{countAverageStar(listComment.listComment) || 0}</span>/<span>5</span>
                         </div>
                         <div className="feedback-statistic-star">
                             <div class="stars-outer">
-                                <div class="stars-inner" style={{ width: `${(countAverageStar(listComment) * 100) / 5}%` }}></div>
+                                <div class="stars-inner" style={{ width: `${(countAverageStar(listComment.listComment) * 100) / 5}%` }}></div>
                             </div>
                         </div>
                     </div>
@@ -302,7 +303,7 @@ function Comment(props) {
                 </div>
                 <div class="comment-question">
                     <div class="comment-question__header">
-                        <div class="comment-question__count">{listComment.data == "" ? "Chưa có bình luận nào" : `Có ${listComment.length} bình luận`}</div>
+                        <div class="comment-question__count">{listComment.data == "" ? "Chưa có bình luận nào" : `Có ${listComment.totalComment} bình luận`}</div>
                         <div class="comment-question__search">
                             <i class="fas fa-search comment-question__search-icon"></i>
                             <input type="text" placeholder="Tìm theo nội dung, người gửi, ...." class="comment-question__search-input" />
