@@ -6,7 +6,6 @@ import DetailProductComponent from '../../components/DetailProduct/DetailProduct
 import SlideProduct from '../../components/Slider/slideproduct';
 import ContentProduct from '../../components/DetailProduct/ContentProduct'
 import ConfigProduct from '../../components/DetailProduct/ConfigProduct'
-import FeedbackStar from '../../components/DetailProduct/FeedBackStar'
 import Comment from '../../components/DetailProduct/Comment'
 function DetailProduct(props) {
     const {id} = props.match.params;
@@ -116,8 +115,7 @@ function DetailProduct(props) {
                 </div>
                 <div className="row">
                     <div className="col-lg-12">
-                        {/* <FeedbackStar/> */}
-                        <Comment/>
+                        <Comment id={id}/>
                     </div>
                 </div>
             </div>

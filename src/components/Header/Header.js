@@ -46,7 +46,6 @@ const Header = () => {
         }
         return total;
     }
-    console.log(user);
     function renderCartItem(){
         var result=null;
         if(product&&product.length>0){
@@ -87,7 +86,8 @@ const Header = () => {
                                 <p className="header__user__name">
                                 {user.username}
                                 </p>
-                                <ul className="header__user__dropdown" >
+                                <ul 
+                                className="header__user__dropdown" >
                                     <i className="fas fa-caret-down" onClick={DropdownUser}></i>
                                     <div className="header__user__dropdown--wrap" style={userDropdown ? {display:'flex'} : {display:'none'}}>
                                         <Link to='/user/order'className="header__user__dropdown--link">
