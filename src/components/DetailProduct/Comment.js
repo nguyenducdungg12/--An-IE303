@@ -189,11 +189,13 @@ function Comment(props) {
     function countAverageStar(listComment) {
         var count = 0;
         if (listComment && listComment.data != "") {
-            console.log(listComment);
             listComment.forEach(ele => {
                 count += ele.start;
             });
-            count = count / listComment.length;
+            if(!listComment.length==0){
+                count = count / listComment.length;
+            }
+
         }
         return count.toFixed(1);
     }
@@ -303,13 +305,14 @@ function Comment(props) {
                 </div>
                 <div class="comment-question">
                     <div class="comment-question__header">
-                        <div class="comment-question__count">{listComment.data == "" ? "Chưa có bình luận nào" : `Có ${listComment.totalComment} bình luận`}</div>
+                        <div class="comment-question__count">{listComment.data == ""|| listComment.listComment.length==0? "Chưa có bình luận nào" : `Có ${listComment.totalComment} bình luận`}</div>
                         <div class="comment-question__search">
                             <i class="fas fa-search comment-question__search-icon"></i>
                             <input type="text" placeholder="Tìm theo nội dung, người gửi, ...." class="comment-question__search-input" />
                         </div>
                     </div>
                     {renderComment(listComment)}
+                    
                 </div>
                 <ul class="pagination ">
                     <li class="pagination-item ">
