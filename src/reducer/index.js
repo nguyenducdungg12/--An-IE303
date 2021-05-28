@@ -5,6 +5,7 @@ import user from './user'
 import siderbarOrder from './sidebarOrder'
 import order from './order'
 import reply from './reply'
+import adminProduct from './AdminProduct'
 const reducer=combineReducers({
     modalLogin,
     cart,
@@ -12,6 +13,7 @@ const reducer=combineReducers({
     order,
     reply,
     siderbarOrder,
+    adminProduct,
 })
 
 export default reducer;

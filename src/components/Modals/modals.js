@@ -9,7 +9,7 @@ import { closeLogin } from './../../actions/index';
 const Modals = () => {
     const display=useSelector(state=>state.modalLogin);
     const dispatch=useDispatch();
-    function closeModal(){
+    function closeModal(e){
         dispatch(closeLogin());
     }
     useEffect(() => {
@@ -21,10 +21,10 @@ const Modals = () => {
         });
     }, []);
     return (
-        <div class="modal1" style={display!=0 ? {display:"block"} :{}}>
-            <div class="modal__body">
-                <div class="modal__body__sign-in modal__body__page">
-                    <div class="modal__body__form__wrap">
+        <div className="modal1" style={display!=0 ? {display:"block"} :{}}>
+            <div className="modal__body">
+                <div className="modal__body__sign-in modal__body__page">
+                    <div className="modal__body__form__wrap">
                         <Login display={display} closeModal={closeModal}/>
                         <Register display={display} closeModal={closeModal}/>
                         <ForgotPassword display={display} closeModal={closeModal}/>

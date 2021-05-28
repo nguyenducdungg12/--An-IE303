@@ -7,7 +7,13 @@ export const getApiUser = ()=>dispatch=>{
         method : "get"
     })
     .then(data=>{
-        dispatch(getUser(data));
+        if(data&&data.statusCode==200){
+            dispatch(getUser(data));
+        }
+        else{
+            localStorage.removeItem("Authorization");
+            dispatch(logOutUser());
+        }
     })
 }
 export const getUser = (data)=>{

@@ -5,8 +5,13 @@ import {useHistory} from 'react-router-dom'
 import axiosClient from '../../helper/axiosClient' 
 import './Order.css'
 import OrderItem from '../../components/Order/Order'
+import Loader from "react-loader-spinner";
+
 function Order() {
-    const [ListOrder, setListOrder] = useState(null);
+    const [ListOrder, setListOrder] = useState({
+        isLoading:false,
+        data:[],
+    });
     const [render, setrender] = useState(false);
     const { TabPane } = Tabs;
     const history = useHistory();
@@ -19,12 +24,19 @@ function Order() {
         }
     }, )
     useEffect(() => {
+        setListOrder({
+            ...ListOrder,
+            isLoading:true,
+        })
         axiosClient({
             url: "http://localhost:8080/api/auth/order",
             method:"get"
         }).then(data=>{
             
-            setListOrder(data);
+            setListOrder({
+                isLoading:false,
+                data:data,
+            })
         })
     }, [render])
    
@@ -60,19 +72,22 @@ function Order() {
            <div className="row">
                <div className="col-12">
                    <div className="order">
-                   <h3 className="order-title">Đơn Hàng<span>{ListOrder&&ListOrder.length} Đơn hàng</span></h3>
+                   <h3 className="order-title">Đơn Hàng<span>{ListOrder&&ListOrder.data.length} Đơn hàng</span></h3>
                    <Tabs defaultActiveKey="1" >
                     <TabPane tab="Tất cả" key="1">
-                        {renderOrder(ListOrder,1)}
+                        {ListOrder.isLoading ? <Loader type="Circles" color="#f50057" height={100} width={100} style={{textAlign:'center',width:'100%'}}/> :   renderOrder(ListOrder.data,1)}
                     </TabPane>
                     <TabPane tab="Chờ duyệt" key="2">
-                    {renderOrder(ListOrder,2)}
+                    {ListOrder.isLoading ? <Loader type="Circles" color="#f50057" height={100} width={100} style={{textAlign:'center',width:'100%'}}/> :  renderOrder(ListOrder.data,2)}
+
                     </TabPane>
                     <TabPane tab="Đã duyệt" key="3">
-                    {renderOrder(ListOrder,3)}
+                    {ListOrder.isLoading ? <Loader type="Circles" color="#f50057" height={100} width={100} style={{textAlign:'center',width:'100%'}}/> :  renderOrder(ListOrder.data,3)}
+                    
                     </TabPane>
                     <TabPane tab="Đã Hủy" key="4">
-                    {renderOrder(ListOrder,4)}
+
+                    {ListOrder.isLoading ?  <Loader type="Circles" color="#f50057" height={100} width={100} style={{textAlign:'center',width:'100%'}}/> : renderOrder(ListOrder.data,4)}
                     </TabPane>
                 </Tabs>
                    </div>

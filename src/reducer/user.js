@@ -6,7 +6,6 @@ const reducer = (state = initialState, action) => {
         case types.GET_USER:
             return {...action.data};
         case types.LOGOUT_USER:{
-            console.log(1235);
             return null;
         }
         default:

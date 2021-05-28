@@ -83,7 +83,7 @@ function Checkout() {
             if(data.statusCode==200){
                 toast.success(data.msg);
                 dispatch(action.deleteAllCart());
-                history.push('/');
+                history.push('/user/order');
             }
             else{
                 toast.erorr(data.msg);

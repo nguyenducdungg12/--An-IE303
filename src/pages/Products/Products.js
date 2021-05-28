@@ -5,6 +5,7 @@ import ProductSort from '../../components/Products/ProductSort'
 import ProductItem from './../../components/Products/ProductItem';
 import Pagination from '../../components/Pagination/Pagination';
 import { useLocation } from 'react-router-dom'
+import Loader from "react-loader-spinner";
 import CallApi from '../../helper/axiosClient'
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -15,7 +16,10 @@ const Products = (props) => {
         max:null,
         min:null,
     })
-    const [ListProduct, setListProduct] = useState(null);
+    const [ListProduct, setListProduct] = useState({
+        isLoading:false,
+        data:null,
+    });
     const [totalPage, settotalPage] = useState(null);
     const query = useQuery();
     const page = query.get("page") || 1;
@@ -25,6 +29,7 @@ const Products = (props) => {
     
     useEffect(() => {
         const getProduct = async () => {
+            setListProduct({...ListProduct,isLoading:true})
             var Data;
             if (category =="search") {
                 Data = await CallApi({
@@ -38,7 +43,7 @@ const Products = (props) => {
                     method: 'get',
                 });
             }
-            setListProduct(Data.listProducts);
+            setListProduct({data:Data.listProducts,isLoading:false});
             settotalPage(Data.totalPage);
         }
         getProduct();
@@ -74,7 +79,7 @@ const Products = (props) => {
             <div class="home-product">
                 <div class="grid">
                     <div class="grid__row">
-                        {handleRenderItem(ListProduct)}
+                        {ListProduct.isLoading ? <Loader type="Circles" color="#f50057" height={100} width={100} style={{textAlign:'center',width:'100%'}}/> :handleRenderItem(ListProduct.data)}
                     </div>
                 </div>
             </div>

@@ -2,17 +2,25 @@ import React,{useEffect} from 'react'
 import {Switch,Route,useRouteMatch,Link } from 'react-router-dom'
 import './admin.css'
 import {useSelector,useDispatch} from 'react-redux';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DashBoard from '../../components/Admin/DashBoard'
-import AdminAccount from '../../components/Admin/AdminAccount'
+import AdminOrder from '../../components/Admin/AdminOrder'
 import AdminProduct from '../../components/Admin/AdminProduct'
 import AdminUser from '../../components/Admin/AdminUser'
 
 function Admin(props) {
     const dispatch = useDispatch();
     const User = useSelector(state => state.user);
+    const {push} = props.history;
+     
     let {path} = useRouteMatch();
+    useEffect(() => {
+       if(!User){
+           toast.error("Bạn không có quyền truy cập trang quản trị");
+           push('/');
+       }
+    }, )
     return (
         <div className="admin">
             <div className="admin-sidebar">
@@ -32,9 +40,9 @@ function Admin(props) {
                         <i class="fas fa-bell"></i>
                         <span>NGƯỜI DÙNG</span>
                         </Link>
-                        <Link to={`${path}/account`} className='admin-sidear-nav-item'>
+                        <Link to={`${path}/order`} className='admin-sidear-nav-item'>
                         <i class="fas fa-bell"></i>
-                        <span>TÀI KHOẢN</span>
+                        <span>ĐƠN HÀNG</span>
                         </Link><Link to={`/`} className='admin-sidear-nav-item'>
                         <i class="fas fa-bell"></i>
                         <span>HOME</span>
@@ -47,7 +55,7 @@ function Admin(props) {
                         <Route path={`${path}/notification` }component={DashBoard}/>
                         <Route path={`${path}/product`} component={AdminProduct}/>
                         <Route path={`${path}/user`} component={AdminUser}/>
-                        <Route path={`${path}/account`} component={AdminAccount}/>
+                        <Route path={`${path}/order`} component={AdminOrder}/>
                     </Switch>
             </div>
             <ToastContainer autoClose={2000} position="bottom-right"/>

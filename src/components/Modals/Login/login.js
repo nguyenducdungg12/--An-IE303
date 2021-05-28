@@ -49,6 +49,7 @@ const Login = (props) => {
         })
     }
     function onSubmitLogin(e) {
+
         e.preventDefault();
         loginUser(valueForm);
     }
@@ -57,41 +58,39 @@ const Login = (props) => {
     }
     return (
         <form style={display == 1 ? { display: "block" } : { display: "none" }} onSubmit={onSubmitLogin}>
-            <div class="modal-main__title--container">
-                <div class="modal-main__title--container__child" onClick={() => dispatch(actions.showRegister())}>
-                    <h1 class="modal-main__title">Đăng ký</h1>
+            <div className="modal-main__title--container">
+                <div className="modal-main__title--container__child" onClick={() => dispatch(actions.showRegister())}>
+                    <h1 className="modal-main__title">Đăng ký</h1>
                 </div>
-                <div class="modal-main__title--container__child modal-main__title--container__child--active" >
-                    <h1 class="modal-main__title">Đăng nhập</h1>
-                </div>
-            </div>
-            <div class="modal__body__sign-in__form modal__body__sign-in__form__DN" style={display == 1 ? { display: "flex" } : { display: "none" }}>
-                <input type="text" class="modal__body__sign-in__form-input" name="username" value={valueForm.username} placeholder="Tên Tài Khoản" onChange={onChangeForm}/>
-                <input type="password" class="modal__body__sign-in__form-input" name="password" value={valueForm.password} placeholder="Mật Khẩu" onChange={onChangeForm}/>
-                <div class="modal__body__sign-in__form-support">
-                    <span  class="modal__body__sign-in__form-helps__forget" onClick={onClickForgotPassword}>Quên Mật Khẩu</span>
-                    <span class="modal__body__sign-in__form-helps__help">Cần Trợ giúp?</span>
-                </div>
-                <div class="modal__body__sign-in__form-button">
-                    <button class="modol__body__sign-in__form-button-back" onClick={closeModal}>
-                        Trở lại
-                    </button>
-                    <button class="modol__body__sign-in__form-button-signin">
-                        Đăng nhập
-                    </button>
+                <div className="modal-main__title--container__child modal-main__title--container__child--active" >
+                    <h1 className="modal-main__title">Đăng nhập</h1>
                 </div>
             </div>
-            <div class="modal__body__footer">
-                <ul class="modal__body__footer__list">
+            <div className="modal__body__sign-in__form modal__body__sign-in__form__DN" style={display == 1 ? { display: "flex" } : { display: "none" }}>
+                <input type="text" className="modal__body__sign-in__form-input" name="username" value={valueForm.username} placeholder="Tên Tài Khoản" onChange={onChangeForm}/>
+                <input type="password" className="modal__body__sign-in__form-input" name="password" value={valueForm.password} placeholder="Mật Khẩu" onChange={onChangeForm}/>
+                <div className="modal__body__sign-in__form-support">
+                    <span  className="modal__body__sign-in__form-helps__forget" onClick={onClickForgotPassword}>Quên Mật Khẩu</span>
+                    <span className="modal__body__sign-in__form-helps__help">Cần Trợ giúp?</span>
+                </div>
+                <div className="modal__body__sign-in__form-button">
+                    <input type="button" value="Trở Lại" className="modol__body__sign-in__form-button-back" onClick={closeModal}/>
+                    <input type="submit" value="Đăng Nhập" className="modol__body__sign-in__form-button-signin"
+                      
+                    />
+                </div>
+            </div>
+            <div className="modal__body__footer">
+                <ul className="modal__body__footer__list">
                     
-                    <li class="modal__body__footer__list-item">
-                        <a href="" class="modal__body__footer__list-item-link" style={{ background: "rgb(34, 34, 138)" }}>
-                            <i class="fab fa-facebook-square"></i>
+                    <li className="modal__body__footer__list-item">
+                        <a href="" className="modal__body__footer__list-item-link" style={{ background: "rgb(34, 34, 138)" }}>
+                            <i className="fab fa-facebook-square"></i>
                             <span>Facebook</span>
                         </a>
                     </li>
-                    <li class="modal__body__footer__list-item">
-                        <a href="" class="modal__body__footer__list-item-link" style={{ background: "#fff", color: "black", display: "flex;" }}>
+                    <li className="modal__body__footer__list-item">
+                        <a href="" className="modal__body__footer__list-item-link" style={{ background: "#fff", color: "black", display: "flex;" }}>
                             <img src="./img/google.png" style={{ width: "20px", objectFit: "cover", marginRight: "30px" }} alt="" />
                             <span>Google</span>
                         </a>

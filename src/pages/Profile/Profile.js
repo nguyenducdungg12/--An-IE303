@@ -1,11 +1,13 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useRef} from 'react'
 import './Profile.css'
 import {useDispatch,useSelector} from 'react-redux'
 import *as action from '../../actions/user'
 import axiosClient from '../../helper/axiosClient'
 import { toast } from 'react-toastify'
 function Profile(props) {
+    const {renderPage} = props;
     const dispatch = useDispatch();
+    const ref = useRef(null);
     const [valueForm, setvalueForm] = useState({
         image:"",
         ngaysinh:"",
@@ -50,22 +52,33 @@ function Profile(props) {
             data : form,
         }).then(data=>{
            if(data.statusCode==200){
+               clearPassword();
                toast.success(data.msg);
                dispatch(action.getApiUser());
+               renderPage();
            }
            else{
             toast.error(data.msg);
            }
         });
     }
+    function clearPassword(){
+        setvalueForm({
+            ...valueForm,
+            currentPassword:"",
+            newPassword:"",
+        })
+    }
     function onChangeImage(e){
+        if(e.target.files.length>0){
+            var src = URL.createObjectURL(e.target.files[0]);
+            ref.current.src=src;
+        }
         setvalueForm({
             ...valueForm,
             image : e.target.files[0],
         })
     }
-    console.log(user);
-    console.log(valueForm);
     return ( user&&
         <div class="container bootstrap snippets bootdeys">
             <div class="row">
@@ -74,7 +87,7 @@ function Profile(props) {
                     <form class="form-horizontal" onSubmit={onSubmitForm}>
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <img src={user.image} class="img-circle profile-avatar" alt="User avatar" />
+                                <img src={user.image} ref={ref}class="img-circle profile-avatar" alt="User avatar" />
                                 <input type="file" class=""name="image" accept="image/*" onChange={onChangeImage}/>
                             </div>
                         </div>
@@ -124,13 +137,13 @@ function Profile(props) {
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Mất khẩu hiện tại</label>
                                     <div class="col-sm-10">
-                                        <input type="password" name="currentPassword" onChange = {onChangeForm} class="form-control" />
+                                        <input type="password" name="currentPassword" value={valueForm.currentPassword} onChange = {onChangeForm} class="form-control" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Mật khẩu mới</label>
                                     <div class="col-sm-10">
-                                        <input type="password" name ="newPassword" onChange = {onChangeForm}  class="form-control" />
+                                        <input type="password" name ="newPassword" value={valueForm.newPassword} onChange = {onChangeForm}  class="form-control" />
                                     </div>
                                 </div>
                                 <div class="form-group">

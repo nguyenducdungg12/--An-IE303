@@ -60,6 +60,7 @@ const Header = () => {
         return result;
     }
     function onLogout(){
+        setuserDropdown(false);
         localStorage.removeItem("Authorization");
         dispatch(action.logOutUser());
     }
@@ -81,7 +82,7 @@ const Header = () => {
                                 </button>
                         </form>
                         <ul class="nav-menu">
-                            {user && <div className="header__user">
+                            {user && <div className="header__user" >
                                 <img src={user.image} className="header__user__img"/>
                                 <p className="header__user__name">
                                 {user.username}
@@ -90,14 +91,14 @@ const Header = () => {
                                 className="header__user__dropdown" >
                                     <i className="fas fa-caret-down" onClick={DropdownUser}></i>
                                     <div className="header__user__dropdown--wrap" style={userDropdown ? {display:'flex'} : {display:'none'}}>
-                                        <Link to='/user/order'className="header__user__dropdown--link">
+                                        <Link to='/user/order'className="header__user__dropdown--link"  onClick={()=>setuserDropdown(false)}>
                                             Quản lý đơn hàng
                                         </Link>
-                                        <Link to='/user/profile' className="header__user__dropdown--link">
+                                        <Link to='/user/profile' className="header__user__dropdown--link"  onClick={()=>setuserDropdown(false)}>
                                             Hồ Sơ
                                         </Link>
                                         {
-                                            user.role=="ADMIN" && <Link to='/admin/product' className="header__user__dropdown--link">
+                                            user.role=="ADMIN" && <Link to='/admin' className="header__user__dropdown--link"  onClick={()=>setuserDropdown(false)}>
                                             Admin
                                         </Link> 
                                         }

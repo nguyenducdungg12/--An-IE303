@@ -2,7 +2,7 @@
     display:flex;
 }
 .admin-sidebar{
-    width: 300px;
+    width: 250px;
     height: 100vh;
     background-image: url(https://image.freepik.com/free-photo/beautiful-wide-shot-eiffel-tower-paris-surrounded-by-water-with-ships-colorful-sky_181624-5118.jpg);
     background-repeat: no-repeat;
@@ -53,3 +53,20 @@
     max-height: 80vh;
     overflow-y: scroll;
 }
+.ck-content h1,.ck-content h2,.ck-content h3,.ck-content h4,.ck-content h5,.ck-content h6{
+    color:#000;
+}
+.ck-editor__editable_inline { height: 400px }
+.product-thumbnail{
+    width: 15%;
+  }
+  .product-thumbnail img{
+    width: 100%;
+  }
+  .product-name{
+    width: 25%;
+  }
+  .order-admin{
+      height: 100vh;
+      overflow-y: scroll;
+  }

@@ -3,38 +3,11 @@ import transferPrice from '../../helper/TransferPrice'
 import {useDispatch} from 'react-redux'
 import axiosClient from '../../helper/axiosClient'
 import { confirmAlert } from 'react-confirm-alert';
-
+import OrderItem from './OrderItem'
 import *as action from '../../actions/order'
 import './Order.css'
 import { toast } from 'react-toastify'
-function OrderItem(props){
-   
-    const {newprice,soluong,title,image} = props.data;
-    return(
-        <div className="order-item">
-            <img src={image} alt="" className="order-item-img" />
-            <p className="order-item-title">
-                {title}
-            </p>
-            <div className="order-item-price-wrap">
-                <span className="order-item-price-title">
-                    Giá
-                </span>
-                <span className="order-item-price">
-                    {transferPrice(newprice)} đ
-                </span>
-            </div>
-            <div className="order-item-quantity-wrap">
-                <span className="order-item-quantity-title">
-                    Số lượng
-                </span>
-                <span className="order-item-quantity">
-                 {soluong}
-                </span>
-            </div>
-        </div>
-    )
-}
+
 
 function Order(props) {
     useEffect(() => {

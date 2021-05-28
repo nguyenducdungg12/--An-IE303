@@ -13,7 +13,15 @@ function DetailProductComponent(props) {
        dispatch(actions.addToCart(Product));
          history.push('/cart');
       }
-    return (
+    function renderListImage(listimage){
+        var temp = [];
+        if(listimage){
+            temp = listimage.map((item,stt)=> <li className="css-4"><img src={item} alt="" className="css-5" /></li>)
+        }
+        return temp;
+    }
+    console.log(Product.listImage);
+    return ( Product&&
         <div className="col-lg-9 css-11">
             <div className="css-90">
                 <div className="css-14">
@@ -22,21 +30,7 @@ function DetailProductComponent(props) {
                             <img src={Product.image} alt="" className="css-2" />
                         </div>
                         <ul className="css-3">
-                            <li className="css-4 ">
-                                <img src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="" className="css-5 hover-active" />
-                            </li>
-                            <li className="css-4">
-                                <img src="https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg" alt="" className="css-5" />
-                            </li>
-                            <li className="css-4">
-                                <img src="https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg" alt="" className="css-5" />
-                            </li>
-                            <li className="css-4">
-                                <img src="https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" alt="" className="css-5" />
-                            </li>
-                            <li className="css-4">
-                                <img src="https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg" alt="" className="css-5" />
-                            </li>
+                           {renderListImage(Product.listImage)}
 
                         </ul>
                         <div className="model">

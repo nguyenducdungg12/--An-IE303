@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Header from './components/Header/Header';
 import Modals from './components/Modals/modals';
@@ -16,7 +16,11 @@ import 'antd/dist/antd.css'
 import './App.css'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-function client() {
+function Client() {
+  const [Render, setRender] = useState(false);
+  function renderPage(){
+    setRender(!Render);
+  }
     return (
         <div className="App">
         <Header></Header>
@@ -28,7 +32,9 @@ function client() {
           <Route path='/Forgot/:id' component={ForgotPassword} />
           <Route path='/user/order' component={OrderPage} />
           <Route path='/checkout' component={CheckoutPage} />
-          <Route path='/user/profile' component={Profile} />
+          <Route path='/user/profile'>
+            <Profile renderPage={renderPage}/>
+          </Route>
           <Route component={ErrorPage} />
         </Switch>
         <Footer></Footer>
@@ -38,4 +44,4 @@ function client() {
     )
 }
 
-export default client
+export default Client
