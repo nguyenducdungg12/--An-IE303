@@ -22,10 +22,21 @@ const Header = () => {
     const dispatch = useDispatch();
     const product = useSelector(state=>state.cart)||[];
     const user = useSelector(state => state.user)
+    const [HideHeader, setHideHeader] = useState(false);
     const [userDropdown, setuserDropdown] = useState(false);
     function DropdownUser(){
         setuserDropdown(!userDropdown);
      }
+     useEffect(() => {
+         window.addEventListener("scroll",(e)=>{
+             if(e.target.defaultView.scrollY>100){
+                setHideHeader(true);
+             }  
+             else{
+                setHideHeader(false);
+             }
+         })
+     }, [])
     const [searchValue, setsearchValue] = useState(null);
     function onChangeValue(e) {
         setsearchValue(e.target.value);
@@ -46,6 +57,7 @@ const Header = () => {
         }
         return total;
     }
+  
     function renderCartItem(){
         var result=null;
         if(product&&product.length>0){
@@ -69,7 +81,7 @@ const Header = () => {
             <div class="banner_header">
                 <img src={banner} alt="" class="banner-img" />
             </div>
-            <nav>
+            <nav style={HideHeader ? {position:"fixed",width:"100%",boxShadow:"0px 4px 24px 0px rgba(0, 0, 0, 0.06)"} : {}}>
                 <div class="container">
                     <div class="nav-wrap">
                         <Link to="/">
@@ -85,7 +97,7 @@ const Header = () => {
                             {user && <div className="header__user" >
                                 <img src={user.image} className="header__user__img"/>
                                 <p className="header__user__name">
-                                {user.username}
+                                {user.name}
                                 </p>
                                 <ul 
                                 className="header__user__dropdown" >

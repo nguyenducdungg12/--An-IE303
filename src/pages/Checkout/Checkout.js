@@ -92,7 +92,6 @@ function Checkout() {
             }
         })
     }
-    console.log(renderAddress())
     return (
         <div className="container ">
         <div className="cart__cupon payment__info">
@@ -103,7 +102,6 @@ function Checkout() {
                         
                         <h3 className="payment__form__title my-4">Tỉnh/Thành phố</h3>
                         <select className="cart__cupon-type-input payment__form--input"
-                            // options={formPayment.thanhpho}
                             onChange={onHandleChange}
                             name="thanhpho"
                             value={formPayment.thanhpho}
@@ -114,7 +112,6 @@ function Checkout() {
                         </select>
                         <h3 className="payment__form__title my-4">Quận/Huyện</h3>
                         <select className="cart__cupon-type-input payment__form--input" disabled={formPayment.thanhpho == "" ? 'disabled' : null}
-                            // options={formPayment.quanhuyen}
                             value={formPayment.quanhuyen}
                             onChange={onHandleChange}
                             name="quanhuyen"
@@ -125,7 +122,6 @@ function Checkout() {
                         </select>
                         <h3 className="payment__form__title my-4">Phường/Xã</h3>
                         <select className="cart__cupon-type-input payment__form--input" disabled={formPayment.quanhuyen == "" ? 'disabled' : null}
-                            // options={formPayment.phuongxa}
                             value={formPayment.phuongxa}
                             onChange={onHandleChange}
                             name="phuongxa"
@@ -138,7 +134,6 @@ function Checkout() {
                         <textarea className='cart__cupon-type-input payment__form--input'name="sonha" id="" cols="30" rows="5" onChange={onHandleChange} placeholder="địa chỉ cụ thể: ấp, số nhà, tên đường"></textarea>
                         <h3 className="payment__form__title my-4" >Chọn phương thức thanh toán</h3>
                         <select className="cart__cupon-type-input payment__form--input" disabled={formPayment.quanhuyen == "" ? 'disabled' : null}
-                            // options={formPayment.phuongxa}
                             value={formPayment.payment}
                             onChange={onHandleChange}
                             name="payment"

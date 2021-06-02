@@ -1,11 +1,12 @@
 import React, { useState,useEffect } from 'react';
 import axiosClient from '../../../helper/axiosClient';
 import * as actions from './../../../actions/index';
+import * as action from './../../../actions/user';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-Register.propTypes = {
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import GoogleLogin from 'react-google-login';
 
-};
 
 function Register(props) {
     const dispatch=useDispatch();
@@ -47,7 +48,6 @@ function Register(props) {
                 phone: data.phone
             }
         });
-        console.log(123,Data);
         if(Data.statusCode==200){
             toast.success(Data.msg);
             toast.success("Truy cập vào Email để kích hoạt tài khoản");
@@ -85,6 +85,70 @@ function Register(props) {
     function onClickForgotPassword(){
         dispatch(actions.showForgotPassword());
     }
+    function responseFacebook(response){
+        axiosClient({
+            url: `http://localhost:8080/api/auth/register/facebook`,
+            method: 'post',
+            data: {
+                username : response.email,
+                name : response.name,
+                password : response.userID,
+                email: response.email,
+                image : response.picture.data.url,
+            }
+        }).then(data=>{
+            if(data.statusCode==200){
+                axiosClient({
+                    url: `http://localhost:8080/api/auth/login`,
+                    method: 'post',
+                    data: {
+                        username : response.email,
+                        password : response.userID,
+                    }
+            }).then(dataResponse=>{
+                localStorage.setItem("Authorization",dataResponse.jwt);
+                dispatch(action.getApiUser());
+                closeModal();
+                clearForm();
+            });
+            }
+            else{
+                toast.error(data.msg);
+            }
+        })
+    }
+    function responseGoogle(response){
+        axiosClient({
+            url: `http://localhost:8080/api/auth/register/facebook`,
+            method: 'post',
+            data: {
+                username : response.Et.ou,
+                name : response.Et.Ue,
+                password : response.Et.MT,
+                email: response.Et.ou,
+                image : response.Et.uK,
+            }
+        }).then(data=>{
+            if(data.statusCode==200){
+                axiosClient({
+                    url: `http://localhost:8080/api/auth/login`,
+                    method: 'post',
+                    data: {
+                        username : response.Et.ou,
+                        password : response.Et.MT,
+                    }
+            }).then(dataResponse=>{
+                localStorage.setItem("Authorization",dataResponse.jwt);
+                dispatch(action.getApiUser());
+                closeModal();
+                clearForm();
+            });
+            }
+            else{
+                toast.error(data.msg);
+            }
+        })
+    }
     return (
         <form style={display == 2 ? { display: "block" } : { display: "none" }} onSubmit={onSubmitRegister}>
             <div className="modal-main__title--container">
@@ -112,19 +176,34 @@ function Register(props) {
             </div>
             <div className="modal__body__footer">
                 <ul className="modal__body__footer__list">
-                   
-                    <li className="modal__body__footer__list-item">
-                        <a href="" className="modal__body__footer__list-item-link" style={{ background: "rgb(34, 34, 138)" }}>
+                <FacebookLogin
+                    appId="600344331360290"
+                    autoLoad
+                    callback={responseFacebook}
+                    fields="name,email,picture"
+                    render={renderProps => (
+                            <li className="modal__body__footer__list-item" onClick={renderProps.onClick}>
+                        <span  className="modal__body__footer__list-item-link" style={{ background: "rgb(34, 34, 138)" }}>
                             <i className="fab fa-facebook-square"></i>
                             <span>Facebook</span>
-                        </a>
-                    </li>
-                    <li className="modal__body__footer__list-item">
-                        <a href="" className="modal__body__footer__list-item-link" style={{ background: "#fff", color: "black", display: "flex;" }}>
-                            <img src="./img/google.png" style={{ width: "20px", objectFit: "cover", marginRight: "30px" }} alt="" />
-                            <span>Google</span>
-                        </a>
-                    </li>
+                        </span>
+                    </li>   )}
+                    />
+                   <GoogleLogin
+                        clientId="280792067113-kv8rna3l8b03a0cut9hegdqfe39ag6h7.apps.googleusercontent.com"
+                        render={renderProps => (
+                            <li className="modal__body__footer__list-item" onClick={renderProps.onClick}>
+                            <span  className="modal__body__footer__list-item-link" style={{ background: "#fff", color: "black", display: "flex;" }}>
+                                <img src="./img/google.png" style={{ width: "20px", objectFit: "cover", marginRight: "30px" }} alt="" />
+                                <span>Google</span>
+                            </span>
+                        </li>)}
+                        buttonText="Login"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy={'single_host_origin'}
+                    />
+                 
                 </ul>
             </div>
         </form>

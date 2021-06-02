@@ -168,6 +168,7 @@
 }
 .modal__body__footer__list-item{
     flex:1;
+    cursor: pointer;
     display:flex;
     align-items: center;
     justify-content: center;

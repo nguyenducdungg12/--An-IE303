@@ -78,14 +78,33 @@ function CartComponent(props) {
             content = (<CartEmpty></CartEmpty>);
         return content;
     }
+    function checkQuantity(ListCart){
+        var temp=[];
+        if(ListCart &&ListCart.length > 0){
+            temp = ListCart.filter((item, stt)=>item.quantity-item.soluong<0);
+        }
+        return temp;
+    }
     function onClickCheckOut(){
         if(!user){
             toast.error("Vui lòng đăng nhập để thanh toán");
             return;
         }
+        else if(checkQuantity(ListCart).length>0){
+            var ProductNotQuantiy = checkQuantity(ListCart);
+            ProductNotQuantiy.forEach(item=>{
+                if(item.quantity<1){
+                    toast.error(`Sản phẩm ${item.title} đã hết hàng vui lòng quay lại sau`);
+                }else{
+                    toast.error(`Sản phẩm ${item.title} chỉ còn lại ${item.quantity} sản phẩm vui lòng chọn lại số lượng`);
+
+                }
+            })
+            return;
+        }
         history.push('/checkout');
     }
-    console.log(ListCart);
+    console.log(checkQuantity(ListCart));
     return (
         <div>
             <div class="grid__row">
