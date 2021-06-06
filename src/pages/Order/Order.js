@@ -6,8 +6,9 @@ import axiosClient from '../../helper/axiosClient'
 import './Order.css'
 import OrderItem from '../../components/Order/Order'
 import Loader from "react-loader-spinner";
+import { toast } from 'react-toastify';
 
-function Order() {
+function Order(props) {
     const [ListOrder, setListOrder] = useState({
         isLoading:false,
         data:[],
@@ -19,10 +20,24 @@ function Order() {
     const sidebar = useSelector(state => state.siderbarOrder)
     const order = useSelector(state => state.order)
     useEffect(() => {
-        if(!user){
+        if(history.location.search){
+            axiosClient({
+                url : "http://localhost:8080/api/auth/payment/return_vnp"+history.location.search,
+                method : "get",
+            }).then(data=>{
+                if(data.code=="00"){
+                    toast.success("Thanh toán thành công");
+                    setrender(true);
+                }
+                else{
+                    toast.error("Thanh toán thất bại");
+                }
+            })
+        }
+        else if(!user){
             history.push('/');
         }
-    }, )
+    },[history])
     useEffect(() => {
         setListOrder({
             ...ListOrder,

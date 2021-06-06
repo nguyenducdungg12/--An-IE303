@@ -104,7 +104,6 @@ function CartComponent(props) {
         }
         history.push('/checkout');
     }
-    console.log(checkQuantity(ListCart));
     return (
         <div>
             <div class="grid__row">

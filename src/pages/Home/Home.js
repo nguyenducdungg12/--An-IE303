@@ -30,7 +30,7 @@ const Home = () => {
                 url: `http://localhost:8080/api/products/${category}?page=${page}&type=${type}`,
                 method: 'get',
             });
-            if (category == 'laptop') {
+            if (category == 'Laptop') {
                 switch (type) {
                     case 1:
                         setListProductKM(Data.listProducts); break;
@@ -45,11 +45,12 @@ const Home = () => {
             else
                 setListProductPK(Data.listProducts);
         }
-        getListProduct('laptop', 1, 1)
-            .then(() => getListProduct('laptop', 1, 2))
-            .then(() => getListProduct('laptop', 1, 3))
+                 getListProduct('Laptop', 1, 1)
+            .then(() => getListProduct('Laptop', 1, 2))
+            .then(() => getListProduct('Laptop', 1, 3))
             .then(() => getListProduct('PK', 1, 1));
     }, [])
+    console.log(ListProductBC)
     return (
         <div className="main">
             <div className="slide-home">
@@ -69,7 +70,7 @@ const Home = () => {
                             <h3 class="product-deal-hot-title">
                                 Laptop Khuyến Mãi Trong Tháng
                     </h3>
-                            <Link to="/Products/laptop?type=2" class="product-hot-btn">
+                            <Link to="/Products/Laptop?type=2" class="product-hot-btn">
                                 Xem tất cả <i class="fas fa-chevron-right"></i>
                             </Link>
                         </div>
@@ -90,7 +91,7 @@ const Home = () => {
                             <h3 class="product-deal-hot-title">
                                 Laptop Bán Chạy Trong Tháng
                     </h3>
-                            <Link to="/Products/laptop?type=3" class="product-hot-btn">
+                            <Link to="/Products/Laptop?type=3" class="product-hot-btn">
                                 Xem tất cả <i class="fas fa-chevron-right"></i>
                             </Link>
                         </div>
@@ -110,7 +111,7 @@ const Home = () => {
                             <h3 class="product-deal-hot-title">
                                 Laptop Mới Nhất Trong Tháng
                     </h3>
-                            <Link to="/Products/laptop" class="product-hot-btn">
+                            <Link to="/Products/Laptop" class="product-hot-btn">
                                 Xem tất cả <i class="fas fa-chevron-right"></i>
                             </Link>
                         </div>

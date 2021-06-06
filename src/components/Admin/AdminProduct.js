@@ -145,7 +145,7 @@ function AddProduct(props) {
                 <label for="exampleFormControlSelect3">Thế loại</label>
                 <select class="form-control" id="exampleFormControlSelect3" value={FormValue.category} onChange={handleChange} name='category'>
                     <option  value=''>Chọn thế loại</option>
-                    <option  value='laptop' >Laptop</option>
+                    <option  value='Laptop' >Laptop</option>
                     <option  value='Màn Hình'>Màn Hình</option>
                     <option  value='Chuột'>Chuột</option>
                     <option  value='Bàn Phím'>Bàn Phím</option>

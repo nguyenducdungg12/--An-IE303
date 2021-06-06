@@ -51,7 +51,6 @@ const Login = (props) => {
         })
     }
     function onSubmitLogin(e) {
-
         e.preventDefault();
         loginUser(valueForm);
     }
@@ -160,7 +159,7 @@ const Login = (props) => {
             <ul className="modal__body__footer__list">
                 <FacebookLogin
                     appId="600344331360290"
-                    autoLoad
+                    
                     callback={responseFacebook}
                     fields="name,email,picture"
                     render={renderProps => (

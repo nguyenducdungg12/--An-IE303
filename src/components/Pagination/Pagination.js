@@ -9,11 +9,11 @@ const Pagination = (props) => {
         if (totalPage < 6) {
             for (let i = 1; i <= totalPage; i++) {
                 if (crrpage == i)
-                    result.push(<Link to={`${category!==""?category+"?":""}${search?'q='+search+'&':''}page=${i}${type!==""?"type="+type:""}`}>
+                    result.push(<Link to={`${category!==""?category+"?":""}${search?'q='+search+'&':''}page=${i}${type!==""?"&type="+type:""}`}>
                         <button class="home-product__page-number home-product__page-number--current ">{i}</button>
                     </Link>)
                 else
-                    result.push(<Link to={`${category!==""?category+"?":""}${search?'q='+search+'&':''}page=${i}${type!==""?"type="+type:""}`}>
+                    result.push(<Link to={`${category!==""?category+"?":""}${search?'q='+search+'&':''}page=${i}${type!==""?"&type="+type:""}`}>
                         <button class="home-product__page-number">{i}</button>
                     </Link>)
             }

@@ -46,6 +46,15 @@ function Checkout() {
         })
         return result;
     }
+    function renderTotalMoney(){
+        var total=0;
+        if(cart.length>0){
+            cart.forEach((item)=>{
+                total += item.soluong*item.newprice;
+            })
+        }
+        return total;
+    }
     function handlingFormDistrict() {
         var result = null;
         if (keylocal.city != null) {
@@ -68,8 +77,27 @@ function Checkout() {
         return `${formPayment.sonha}-${formPayment.phuongxa}-${formPayment.quanhuyen}-${formPayment.thanhpho} `
     }
     function onHandleSubmit(e){
+        console.log(formPayment);
 
         e.preventDefault();
+        if(formPayment.payment=="2"){
+            AxiosClient({
+                url : "http://localhost:8080/api/auth/payment/create",
+                method : "post",
+                data : {
+                    adress : renderAddress(),
+                    products : cart,
+                    payment : formPayment.payment,
+                    price : renderTotalMoney(),
+                }
+            }).then(data=>{
+                console.log(data);
+                if(data.code=="00"){
+                    window.location.href = data.data;
+                }
+            })
+        }
+        else{
         AxiosClient({
             url : 'http://localhost:8080/api/auth/order',
             method : 'post',
@@ -92,6 +120,8 @@ function Checkout() {
             }
         })
     }
+    }
+    
     return (
         <div className="container ">
         <div className="cart__cupon payment__info">

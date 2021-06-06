@@ -87,8 +87,8 @@ function DetailProductComponent(props) {
                         <div className="css-30 css-1002">
                             <div className="css-31">Chọn thêm 1 trong những khuyến mãi sau</div>
                             <div className="css-32">
-                                <div className="css-33">Giá: <span>{transferPrice(Product.oldprice-2000000)}đ</span> </div>
-                                <div className="css-34">Đã giảm thêm <span>2.000.000đ</span> </div> 
+                                <div className="css-33">Giá: <span>{transferPrice(Product.oldprice)}đ</span> </div>
+                                <div className="css-34">Đã giảm thêm <span>{transferPrice(Product.oldprice-Product.newprice)}</span> </div> 
                             </div>
                             <div className="css-35">
                                 <div className="css-36"> <div onClick={onClickBuy} className="css-39">Mua ngay</div> </div>
