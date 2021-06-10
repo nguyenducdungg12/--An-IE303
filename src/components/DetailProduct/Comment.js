@@ -152,12 +152,12 @@ function Comment(props) {
     }
     useEffect(() => {
         axiosClient({
-            url: `http://localhost:8080/api/detailproducts/${id}/comment`,
+            url: `http://localhost:8080/api/detailproducts/${id}/comment?page=${page}`,
             method: "get",
         }).then(data => {
             setlistComment(data);
         })
-    }, [isrenderComment])
+    }, [isrenderComment,page])
     function onVoteStar(e) {
         setcomment({
             ...comment,

@@ -164,31 +164,31 @@ const Header = () => {
                             <div class="header-categore-dropdown container ">
                                 <div class="header-categore-dropdown-wrap">
                                     <ul class="header-category-list">
-                                    <Link to='/Products/laptop  '>
+                                    <Link to='/Products/Laptop'>
                                         <li class="header-category-item">     
                                             <img src={laptop} alt="" class="header-category-item-img" />
                                             <span>Laptop</span>
                                         </li>
                                     </Link>
-                                    <Link to='/Products/PK'>
+                                    <Link to='/Products/Màn hình'>
                                         <li class="header-category-item">
                                             <img src={manhinh} alt="" class="header-category-item-img" />
                                             <span>Màn Hình</span>
                                         </li>
                                     </Link>
-                                    <Link to='/Products/PK'>
+                                    <Link to='/Products/Chuột'>
                                         <li class="header-category-item">
                                             <img src={chuot} alt="" class="header-category-item-img" />
                                             <span>Chuột</span>
                                         </li>
                                     </Link>
-                                    <Link to='/Products/PK'>
+                                    <Link to='/Products/Bàn Phím'>
                                         <li class="header-category-item">
                                             <img src={banphim} alt="" class="header-category-item-img" />
                                             <span>Bàn phím</span>
                                         </li>
                                     </Link>
-                                    <Link to='/Products/PK'>
+                                    <Link to='/Products/PC'>
                                         <li class="header-category-item">
                                             <img src={pc} alt="" class="header-category-item-img" />
                                             <span>PC</span>
