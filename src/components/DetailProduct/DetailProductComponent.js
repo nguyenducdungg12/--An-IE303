@@ -20,7 +20,6 @@ function DetailProductComponent(props) {
         }
         return temp;
     }
-    console.log(Product.listImage);
     return ( Product&&
         <div className="col-lg-9 css-11">
             <div className="css-90">

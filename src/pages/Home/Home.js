@@ -30,6 +30,7 @@ const Home = () => {
                 url: `http://localhost:8080/api/products/${category}?page=${page}&type=${type}`,
                 method: 'get',
             });
+            
             if (category == 'Laptop') {
                 switch (type) {
                     case 1:
@@ -50,7 +51,6 @@ const Home = () => {
             .then(() => getListProduct('Laptop', 1, 3))
             .then(() => getListProduct('PK', 1, 1));
     }, [])
-    console.log(ListProductBC)
     return (
         <div className="main">
             <div className="slide-home">

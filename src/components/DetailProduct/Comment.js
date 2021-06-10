@@ -31,7 +31,6 @@ function ReplyItem(props){
     const [content, setcontent] = useState("");
     function onSendComment(){
         if(!user){
-            console.log(123);
             toast.error("Vui lòng đăng nhập để bình luận");
             return;
         }
@@ -74,7 +73,7 @@ function Reply(props){
         <div className="comment-reply">
         <div className="comment-reply-heading">
         <img src={reply.user.image} alt="" className="commment-avatar" />
-            <div className="comment-reply-name">{reply.user.username}</div>
+            <div className="comment-reply-name">{reply.user.name}</div>
         </div>
         <div className="css-826">{reply.content}</div>
         <div className="css-830" style={{color:"#999"}}>{transferDate(reply.createBy)}</div>
@@ -100,7 +99,7 @@ function CommentItem(props) {
             <div className="css-820 ">
                 <div className="css-821">
                 <img src={comment.user.image} alt="" className="commment-avatar" />
-                    <div className="css-822">{comment.user.username}</div>
+                    <div className="css-822">{comment.user.name}</div>
                     <div className="css-823">
                         <i className="far fa-check-circle"></i>
                  Đã mua tại G7

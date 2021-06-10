@@ -7,34 +7,63 @@ import SlideProduct from '../../components/Slider/slideproduct';
 import ConfigProduct from '../../components/DetailProduct/ConfigProduct'
 import Comment from '../../components/DetailProduct/Comment'
 import parse from 'html-react-parser';
+import Loader from "react-loader-spinner";
 
 function DetailProduct(props) {
     const {id} = props.match.params;
     const [MoreContent, setMoreContent] = useState(false);
-    const [Product, setProduct] = useState(null);
-   
+    const [Product, setProduct] = useState({
+        isLoading:false,
+        Product:null,
+    });
+    const [ListProduct, setListProduct] = useState(null)
+    const [ListPK, setListPK] = useState(null)
     useEffect(() => {
         async function getProduct(){
+            setProduct({
+                ...Product,
+                isLoading:true,
+            })
             var data = await CallApi({
                 url : `http://localhost:8080/api/detailproducts/${id}`,
                 method : 'get'
             })
-            setProduct(data);
+         
+           
+            setProduct({
+                Product : data,
+                isLoading:false,
+            });
+          
         }   
         getProduct();
+    }, [id])
+    useEffect(() => {
+        async function getData(){
+            var RESPONSEListProduct = await CallApi({
+                url: `http://localhost:8080/api/products/Laptop`,
+                method: 'get',
+            })
+            var responseListPK = await CallApi({
+                url: `http://localhost:8080/api/products/PK`,
+                method: 'get',
+            })
+           
+            setListProduct(RESPONSEListProduct);
+            setListPK(responseListPK);
+        }   
+        getData();
     }, [])
     function onShowMoreContent(){
         setMoreContent(true);
     }
-    function renderNotify(notify){
-
-    }
-    return (Product &&
+   
+    return (!Product.isLoading &&Product.Product?
         <div className="DetailProduct">
             <div className="container">
-                <Breadcum ListBreadcum={[Product.category]} final={Product.title}/>
+                <Breadcum ListBreadcum={[Product.Product.category]} final={Product.Product.title}/>
                 <div className="row">
-                    <DetailProductComponent Product = {Product} Notify={renderNotify}/>
+                    <DetailProductComponent Product = {Product.Product} />
                     <div class="col-lg-3 css-80">
                         <div class="css-100">
                             <div class="css-81 css-1002">
@@ -86,7 +115,7 @@ function DetailProduct(props) {
                                 <a href="../Trangsanpham/banchay.html" class="header-a">Xem tất cả</a>
                             </div>
                         </div>
-                        <SlideProduct/>
+                        {ListProduct&&<SlideProduct ListProduct={ListProduct.listProducts}/>}
                     </div>
                 </div>
                 <div className="row">
@@ -97,7 +126,7 @@ function DetailProduct(props) {
                                 <a href="../Trangsanpham/banchay.html" class="header-a">Xem tất cả</a>
                             </div>
                         </div>
-                        <SlideProduct/>
+                        {ListPK&&<SlideProduct ListProduct = {ListPK.listProducts}/>}
                     </div>
                 </div>
            
@@ -106,7 +135,7 @@ function DetailProduct(props) {
                     <div className="product-description col-lg-8 pr-5">
                             <h1 class="header-h1-1">Mô tả sản phẩm</h1>
                             <div className="product-description-wrap">
-                                {parse(Product.content)}
+                                {parse(Product.Product.content)}
                             </div>
 
                     </div>
@@ -123,7 +152,7 @@ function DetailProduct(props) {
                 </div>
             </div>
         </div>
-    )
+    :<Loader type="Circles" color="#f50057" height={100} width={100} style={{textAlign:'center',width:'100%'}}/>)
 }
 
 export default DetailProduct
