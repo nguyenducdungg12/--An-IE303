@@ -12,6 +12,10 @@ import icon4 from '../../assets/img/xk4s.png'
 import icon5 from '../../assets/img/xk5s.png'
 import transferPrice from '../../helper/TransferPrice'
 import laptop from '../../assets/img/xxx21.png'
+import pc from '../../assets/img/xxx22.png'
+import manhinh from '../../assets/img/xxx26.png'
+import chuot from '../../assets/img/xxx28.png'
+import banphim from '../../assets/img/xxx27.png'
 import * as actions from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom'
@@ -160,117 +164,36 @@ const Header = () => {
                             <div class="header-categore-dropdown container ">
                                 <div class="header-categore-dropdown-wrap">
                                     <ul class="header-category-list">
-                                        <li class="header-category-item">
-                                            <Link to='product/'></Link>
+                                    <Link to='/Products/Laptop'>
+                                        <li class="header-category-item">     
                                             <img src={laptop} alt="" class="header-category-item-img" />
                                             <span>Laptop</span>
-                                            <div class="header-category-item-notify category-notify-1">
-                                                <div class="header-category-item-notify-list">
-                                                    <div class="header-category-item-notify-list-item">
-                                                        <h3 class="header-category-item-notify-list-item-title"><a href="" class="header-category-item-notify-list-item-title--link">Laptop Gaming</a></h3>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Acer</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Asus</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">MSI</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">HP</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Dell</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Lenovo</a></p>
-                                                    </div>
-                                                    <div class="header-category-item-notify-list-item">
-                                                        <h3 class="header-category-item-notify-list-item-title"><a href="" class="header-category-item-notify-list-item-title--link">Laptop Văn Phòng</a></h3>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Acer</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">HP</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Asus</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Lenovo</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Dell</a></p>
-                                                    </div>
-                                                    <div class="header-category-item-notify-list-item">
-                                                        <h3 class="header-category-item-notify-list-item-title"><a href="" class="header-category-item-notify-list-item-title--link">Laptop Doanh Nhân</a></h3>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Acer</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Asus</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Dell</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">HP</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">MSI</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">LG</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Lenovo</a></p>
-                                                    </div>
-                                                    <div class="header-category-item-notify-list-item">
-                                                        <h3 class="header-category-item-notify-list-item-title"><a href="" class="header-category-item-notify-list-item-title--link">Laptop Dell</a></h3>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Inspiron Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">G Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">XPS Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Vostro Series</a></p>
-
-                                                    </div>
-                                                    <div class="header-category-item-notify-list-item">
-                                                        <h3 class="header-category-item-notify-list-item-title"><a href="" class="header-category-item-notify-list-item-title--link">Laptop HP</a></h3>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">HP 15s/ 14s Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Pavilion Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">ProBook Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Envy Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Spectre Series</a></p>
-                                                    </div>
-                                                    <div class="header-category-item-notify-list-item">
-                                                        <h3 class="header-category-item-notify-list-item-title"><a href="" class="header-category-item-notify-list-item-title--link">Laptop Lenovo</a></h3>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">L-Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Legion Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Ideadpad Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">ThinkPad Series</a></p>
-
-                                                    </div>
-                                                </div>
-                                                <div class="header-category-item-notify-list">
-                                                    <div class="header-category-item-notify-list-item">
-                                                        <h3 class="header-category-item-notify-list-item-title"><a href="" class="header-category-item-notify-list-item-title--link">Laptop Acer</a></h3>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Acer</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Asus</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">MSI</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">HP</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Dell</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Lenovo</a></p>
-                                                    </div>
-                                                    <div class="header-category-item-notify-list-item">
-                                                        <h3 class="header-category-item-notify-list-item-title"><a href="" class="header-category-item-notify-list-item-title--link">Laptop Asus</a></h3>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Acer</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">HP</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Asus</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Lenovo</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Dell</a></p>
-                                                    </div>
-                                                    <div class="header-category-item-notify-list-item">
-                                                        <h3 class="header-category-item-notify-list-item-title"><a href="" class="header-category-item-notify-list-item-title--link">Laptop MSI</a></h3>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Bravo & Alpha Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">GF Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">GL Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">GE Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">GS Series</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">Modern & Prestige Series</a></p>
-                                                    </div>
-                                                    <div class="header-category-item-notify-list-item">
-                                                        <h3 class="header-category-item-notify-list-item-title"><a href="" class="header-category-item-notify-list-item-title--link">Laptop LG</a></h3>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">LG Gram</a></p>
-
-                                                    </div>
-                                                    <div class="header-category-item-notify-list-item">
-                                                        <h3 class="header-category-item-notify-list-item-title"><a href="" class="header-category-item-notify-list-item-title--link">Laptop theo VGA</a></h3>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">GTX 1650</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">GTX 1660Ti</a></p>
-                                                        <p class="header-category-item-notify-list-item-content"><a href="" class="header-category-item-notify-list-item-content--link">RTX Series</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </li>
+                                    </Link>
+                                    <Link to='/Products/Màn hình'>
                                         <li class="header-category-item">
-                                            <img src={laptop} alt="" class="header-category-item-img" />
+                                            <img src={manhinh} alt="" class="header-category-item-img" />
+                                            <span>Màn Hình</span>
+                                        </li>
+                                    </Link>
+                                    <Link to='/Products/Chuột'>
+                                        <li class="header-category-item">
+                                            <img src={chuot} alt="" class="header-category-item-img" />
                                             <span>Chuột</span>
                                         </li>
+                                    </Link>
+                                    <Link to='/Products/Bàn Phím'>
                                         <li class="header-category-item">
-                                            <img src={laptop} alt="" class="header-category-item-img" />
-                                            <span>Màn hình</span>
+                                            <img src={banphim} alt="" class="header-category-item-img" />
+                                            <span>Bàn phím</span>
                                         </li>
+                                    </Link>
+                                    <Link to='/Products/PC'>
                                         <li class="header-category-item">
-                                            <img src={laptop} alt="" class="header-category-item-img" />
-                                            <span>Laptop</span>
+                                            <img src={pc} alt="" class="header-category-item-img" />
+                                            <span>PC</span>
                                         </li>
+                                    </Link>
                                     </ul>
                                 </div>
                             </div>

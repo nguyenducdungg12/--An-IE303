@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axiosClient from '../../helper/axiosClient'
 import { toast } from 'react-toastify';
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import *as action from '../../actions/reply'
+import { useLocation } from 'react-router-dom';
+import PaginationComment from './../Pagination/PaginationComment';
 function generateStar(number) {
     var arr = [];
     for (var i = 1; i <= number; i++) {
@@ -24,73 +26,74 @@ function transferDate(time) {
     }
     return `ngày ${y.getDate()} Tháng ${y.getMonth() + 1} Năm ${y.getFullYear()}`;
 }
-function ReplyItem(props){
-    const {idComment,id,isRenderComments} = props;
+function ReplyItem(props) {
+    const { idComment, id, isRenderComments } = props;
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
     const [content, setcontent] = useState("");
-    function onSendComment(){
-        if(!user){
+    function onSendComment() {
+        if (!user) {
+            console.log(123);
             toast.error("Vui lòng đăng nhập để bình luận");
             return;
         }
 
         axiosClient({
-            url : `http://localhost:8080/api/detailproducts/${id}/reply/${idComment}`,
-            method:"post",
-            data : {
-                content : content,
+            url: `http://localhost:8080/api/detailproducts/${id}/reply/${idComment}`,
+            method: "post",
+            data: {
+                content: content,
             }
-        }).then(data=>{
+        }).then(data => {
             setcontent("");
             isRenderComments();
         })
     }
-    function onChangeContent(e){
+    function onChangeContent(e) {
         setcontent(e.target.value);
     }
-    function onClickCancel(){
+    function onClickCancel() {
         dispatch(action.getKey(null));
     }
-    return(
+    return (
         <div>
-                    <textarea name="content" rows="5" class="comment-input-box" value={content} onChange={onChangeContent}></textarea>
-                    <div class="comment-input-nav">
-                        <div class="comment-input-nav-right">
-                            <div class="comment-input__text temp">Quy định đăng bình luận</div>
-                        </div>
-                        <div style={{display:"flex"}}>
-                        <div class="comment-input-nav-left" onClick={onClickCancel}>Hủy</div>
-                        <div class="comment-input-nav-left" onClick={onSendComment}>Gửi</div>
-                        </div>
-                    </div>
+            <textarea name="content" rows="5" class="comment-input-box" value={content} onChange={onChangeContent}></textarea>
+            <div class="comment-input-nav">
+                <div class="comment-input-nav-right">
+                    <div class="comment-input__text temp">Quy định đăng bình luận</div>
                 </div>
+                <div style={{ display: "flex" }}>
+                    <div class="comment-input-nav-left" onClick={onClickCancel}>Hủy</div>
+                    <div class="comment-input-nav-left" onClick={onSendComment}>Gửi</div>
+                </div>
+            </div>
+        </div>
     )
 }
-function Reply(props){
-    const {reply} = props;
+function Reply(props) {
+    const { reply } = props;
     return (
         <div className="comment-reply">
-        <div className="comment-reply-heading">
-        <img src={reply.user.image} alt="" className="commment-avatar" />
-            <div className="comment-reply-name">{reply.user.name}</div>
+            <div className="comment-reply-heading">
+                <img src={reply.user.image} alt="" className="commment-avatar" />
+                <div className="comment-reply-name">{reply.user.username}</div>
+            </div>
+            <div className="css-826">{reply.content}</div>
+            <div className="css-830" style={{ color: "#999" }}>{transferDate(reply.createBy)}</div>
         </div>
-        <div className="css-826">{reply.content}</div>
-        <div className="css-830" style={{color:"#999"}}>{transferDate(reply.createBy)}</div>
-    </div>
     )
 }
 function CommentItem(props) {
-    const { comment,isRenderComments,datakey,id } = props;
+    const { comment, isRenderComments, datakey, id } = props;
     const dispatch = useDispatch();
     const keyReply = useSelector(state => state.reply)
-    function onClickReply(){
+    function onClickReply() {
         dispatch(action.getKey(datakey));
     }
-    function renderReply(reply){
+    function renderReply(reply) {
         var temp = [];
-        if(reply&&reply.data!=""){
-            temp = reply.map((item,stt)=><Reply reply={item} key={stt}/>);
+        if (reply && reply.data != "") {
+            temp = reply.map((item, stt) => <Reply reply={item} key={stt} />);
         }
         return temp;
     }
@@ -98,8 +101,8 @@ function CommentItem(props) {
         <div className="review">
             <div className="css-820 ">
                 <div className="css-821">
-                <img src={comment.user.image} alt="" className="commment-avatar" />
-                    <div className="css-822">{comment.user.name}</div>
+                    <img src={comment.user.image} alt="" className="commment-avatar" />
+                    <div className="css-822">{comment.user.username}</div>
                     <div className="css-823">
                         <i className="far fa-check-circle"></i>
                  Đã mua tại G7
@@ -116,13 +119,17 @@ function CommentItem(props) {
                     <div className="sque m-6"></div>
                     <div className="css-830 m-6">{transferDate(comment.createBy)}</div>
                 </div>
-                {comment.reply&&<div className="List-comment-reply">
+                {comment.reply && <div className="List-comment-reply">
                     {renderReply(comment.reply)}
                 </div>}
-                </div>
-                {keyReply==datakey&&<ReplyItem id={id} isRenderComments={isRenderComments} idComment={comment.id}/>}
             </div>
+            {keyReply == datakey && <ReplyItem id={id} isRenderComments={isRenderComments} idComment={comment.id} />}
+        </div>
     )
+}
+
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
 }
 
 function Comment(props) {
@@ -130,21 +137,27 @@ function Comment(props) {
     const [listComment, setlistComment] = useState(null)
     const [isrenderComment, setisrenderComment] = useState(false);
     const { id } = props;
+    const query = useQuery();
+    const page = query.get("page") || 1;
     const [comment, setcomment] = useState({
         VoteStart: 1,
         content: "",
     })
-    function isRenderComments(){
+    function isRenderComments() {
         setisrenderComment(!isrenderComment);
+    }
+    const [searchCmt, setsearchCmt] = useState('');
+    function onChangeSearchCmt(e) {
+        setsearchCmt(e.target.value);
     }
     useEffect(() => {
         axiosClient({
-            url: `http://localhost:8080/api/detailproducts/${id}/comment`,
+            url: `http://localhost:8080/api/detailproducts/${id}/comment?page=${page}`,
             method: "get",
         }).then(data => {
             setlistComment(data);
         })
-    }, [isrenderComment])
+    }, [isrenderComment,page])
     function onVoteStar(e) {
         setcomment({
             ...comment,
@@ -181,7 +194,7 @@ function Comment(props) {
     function renderComment(comment) {
         var temp = [];
         if (comment && comment.data != "") {
-            temp = comment.listComment.map((item, stt) => <CommentItem key={stt} datakey={stt} isRenderComments ={isRenderComments} id={id} comment={item} />);
+            temp = comment.listComment.map((item, stt) => <CommentItem key={stt} datakey={stt} isRenderComments={isRenderComments} id={id} comment={item} />);
         }
         return temp;
     }
@@ -191,7 +204,7 @@ function Comment(props) {
             listComment.forEach(ele => {
                 count += ele.start;
             });
-            if(!listComment.length==0){
+            if (!listComment.length == 0) {
                 count = count / listComment.length;
             }
 
@@ -304,49 +317,17 @@ function Comment(props) {
                 </div>
                 <div class="comment-question">
                     <div class="comment-question__header">
-                        <div class="comment-question__count">{listComment.data == ""|| listComment.listComment.length==0? "Chưa có bình luận nào" : `Có ${listComment.totalComment} bình luận`}</div>
-                        <div class="comment-question__search">
-                            <i class="fas fa-search comment-question__search-icon"></i>
-                            <input type="text" placeholder="Tìm theo nội dung, người gửi, ...." class="comment-question__search-input" />
-                        </div>
+                        <div class="comment-question__count">{listComment.data == "" || listComment.listComment.length == 0 ? "Chưa có bình luận nào" : `Có ${listComment.totalComment} bình luận`}</div>
+                        {
+                            listComment.data == "" || listComment.listComment.length == 0 ? "" : <div class="comment-question__search">
+                                <i class="fas fa-search comment-question__search-icon"></i>
+                                <input type="text" placeholder="Tìm theo nội dung, người gửi, ...." class="comment-question__search-input" value={searchCmt} onChange={onChangeSearchCmt} />
+                            </div>
+                        }
                     </div>
                     {renderComment(listComment)}
-                    
                 </div>
-                <ul class="pagination ">
-                    <li class="pagination-item ">
-                        <a href="" class="pagination-item__link">
-                            <i class="pagination-item__icon fas fa-chevron-left "></i>
-                        </a>
-                    </li>
-                    <li class="pagination-item pagination-item--active">
-                        <a href="" class="pagination-item__link">1</a>
-                    </li>
-                    <li class="pagination-item">
-                        <a href="" class="pagination-item__link">2</a>
-                    </li>
-                    <li class="pagination-item">
-                        <a href="" class="pagination-item__link">3</a>
-                    </li>
-                    <li class="pagination-item">
-                        <a href="" class="pagination-item__link">4</a>
-                    </li>
-                    <li class="pagination-item">
-                        <a href="" class="pagination-item__link">5</a>
-                    </li>
-                    <li class="pagination-item">
-                        <a href="" class="pagination-item__link">...</a>
-                    </li>
-                    <li class="pagination-item">
-                        <a href="" class="pagination-item__link">14</a>
-                    </li>
-
-                    <li class="pagination-item">
-                        <a href="" class="pagination-item__link">
-                            <i class="pagination-item__icon fas fa-chevron-right "></i>
-                        </a>
-                    </li>
-                </ul>
+                {listComment.data == "" || listComment.listComment.length == 0 ? "" : <PaginationComment totalPage={listComment.totalPage} crrpage={parseInt(page)} search={searchCmt} id={id} />}
             </div>
         </div>
     )

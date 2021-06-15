@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Slider from "react-slick";
 import {Link} from 'react-router-dom'
 import transferPrice from '../../helper/TransferPrice'
@@ -14,7 +14,7 @@ const PrevSlide = (props) => {
 }
 const SlideProductItem = (props) => {
     const { oldprice,title,id,newprice,image} = props.dataProduct;
-    return <Link to={`../DetailProduct/${id}`}class="item product-deal-hot-item">
+    return <Link to={`./DetailProduct/${id}`}class="item product-deal-hot-item">
         <img src={image} alt="" class="product-deadl-hot-img" />
         <div class="product-deal-hot-desc">
             <p class="product-deal-ho-namet">
@@ -51,7 +51,7 @@ const SlideProduct = (props) => {
     };
     return (
         <Slider {...settings}>
-            {renderSlide(ListProduct)}
+            {renderSlide(ListProduct,type)}
         </Slider>
     );
 };

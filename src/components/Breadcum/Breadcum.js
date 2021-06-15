@@ -6,9 +6,10 @@ function Breadcum(props) {
     function content(){
         var result = [];
         if(ListBreadcum){
+
             ListBreadcum.forEach(element => {
                 result.push(<span class="cart-home__filter-right">{'>'}</span>);
-                result.push(<Link to={`/Products/${element}`} class="cart-home__filter-current">{element}</Link>);
+                result.push(<span class="cart-home__filter-current">{element}</span>);
             });
         }
         result.push(<span class="cart-home__filter-right">{'>'}</span>);
@@ -26,3 +27,4 @@ function Breadcum(props) {
     )
 }
 export default Breadcum
+ 

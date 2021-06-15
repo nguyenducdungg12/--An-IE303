@@ -30,7 +30,6 @@ const Home = () => {
                 url: `http://localhost:8080/api/products/${category}?page=${page}&type=${type}`,
                 method: 'get',
             });
-            
             if (category == 'Laptop') {
                 switch (type) {
                     case 1:

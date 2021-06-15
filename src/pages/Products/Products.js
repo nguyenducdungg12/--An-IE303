@@ -48,7 +48,13 @@ const Products = (props) => {
         }
         getProduct();
     },[props.location,option])
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
 
+    })
     function changeOption ({max,min,sort}){
         setoption({
             ...option,

@@ -4,24 +4,39 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import transferPrice from '../../helper/TransferPrice'
 import * as actions from './../../actions/index';
+import ModalPic from './ModalPic';
 
 function DetailProductComponent(props) {
     const { Product } = props;
+    const [dismodal, setdismodal] = useState(null);
     const history = useHistory();
-    const dispatch=useDispatch();
-    function onClickBuy(){
-       dispatch(actions.addToCart(Product));
-         history.push('/cart');
-      }
-    function renderListImage(listimage){
+    const dispatch = useDispatch();
+    function onClickBuy() {
+        dispatch(actions.addToCart(Product));
+        history.push('/cart');
+    }
+
+    function QuitModal() {
+        setdismodal(null);
+    }
+
+    function ChangeModal(data) {
+        var lengthPic = Product.listImage.length;
+        setdismodal({ item: Product.listImage[dismodal.stt + data], stt: dismodal.stt + data })
+        if (data == -1 && dismodal.stt == 0) setdismodal({ item: Product.listImage[lengthPic + data], stt: lengthPic + data });
+        if (data == 1 && dismodal.stt == lengthPic-1) setdismodal({ item: Product.listImage[0], stt: 0 });
+    }
+
+    function renderListImage(listimage) {
         var temp = [];
-        if(listimage){
-            temp = listimage.map((item,stt)=> <li className="css-4"><img src={item} alt="" className="css-5" /></li>)
+        if (listimage) {
+            temp = listimage.map((item, stt) => <li className="css-4"><img src={item} onClick={() => setdismodal({ item: item, stt: stt })} alt="" className="css-5" /></li>)
         }
         return temp;
     }
-    return ( Product&&
+    return (Product &&
         <div className="col-lg-9 css-11">
+            {dismodal ? <ModalPic src={dismodal} QuitModal={QuitModal} ChangeModal={ChangeModal}></ModalPic> : ""}
             <div className="css-90">
                 <div className="css-14">
                     <div className="css-1 css-1002">
@@ -29,7 +44,7 @@ function DetailProductComponent(props) {
                             <img src={Product.image} alt="" className="css-2" />
                         </div>
                         <ul className="css-3">
-                           {renderListImage(Product.listImage)}
+                            {renderListImage(Product.listImage)}
 
                         </ul>
                         <div className="model">
@@ -87,11 +102,11 @@ function DetailProductComponent(props) {
                             <div className="css-31">Chọn thêm 1 trong những khuyến mãi sau</div>
                             <div className="css-32">
                                 <div className="css-33">Giá: <span>{transferPrice(Product.oldprice)}đ</span> </div>
-                                <div className="css-34">Đã giảm thêm <span>{transferPrice(Product.oldprice-Product.newprice)}</span> </div> 
+                                <div className="css-34">Đã giảm thêm <span>{transferPrice(Product.oldprice - Product.newprice)}</span> </div>
                             </div>
                             <div className="css-35">
                                 <div className="css-36"> <div onClick={onClickBuy} className="css-39">Mua ngay</div> </div>
-                                <div className="css-37"> <div className="css-39 css-40" onClick={() => {toast.success("Thêm giỏ hàng thành công");dispatch(actions.addToCart(Product));}}>Thêm vào giỏ hàng</div></div>
+                                <div className="css-37"> <div className="css-39 css-40" onClick={() => { toast.success("Thêm giỏ hàng thành công"); dispatch(actions.addToCart(Product)); }}>Thêm vào giỏ hàng</div></div>
                             </div>
                         </div>
                         <div className="css-20">

@@ -405,9 +405,15 @@ nav{
     /* bỏ cái này đi cho nó mượt Đăng :)) */
 }
 
+.header-category-item span{
+    color:black;
+}
+.header-category-item:hover span{
+    color: white;
+}
 .header-category-item:hover {
     background-color: #008BFC;
-    color: white;
+
 }
 
 .header-category-item-notify{
@@ -481,6 +487,7 @@ nav{
 
 .header-category-item-notify-list-item-title--link{
     color:#008BFC;
+    font-size: 20px;
 }
 .header-category-item-notify-list-item-content{
     margin:10px 0;
