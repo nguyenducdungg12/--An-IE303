@@ -13,6 +13,7 @@ function Profile(props) {
         ngaysinh:"",
         sex:1, //1 Nam 2 nữ
         phone:"",
+        name:"",
         currentPassword:"",
         newPassword : "",
     })
@@ -25,6 +26,7 @@ function Profile(props) {
                 phone:user.phone,
                 sex : user.sex||"",
                 ngaysinh : user.ngaysinh||"",
+                name : user.name || ""
             })
         }
       if(!user){
@@ -46,6 +48,8 @@ function Profile(props) {
         form.append("ngaysinh",valueForm.ngaysinh);
         form.append("currentPassword",valueForm.currentPassword);
         form.append("newPassword",valueForm.newPassword);
+        form.append("name",valueForm.name);
+
         axiosClient({
             url : "http://localhost:8080/api/auth/user/update",
             method:"post",
@@ -100,10 +104,17 @@ function Profile(props) {
                                     <input type="text" class="form-control custom-form" value={user.username}disabled/>
                                     </div>
                                 </div>
+                               
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Email</label>
                                     <div class="col-sm-10">
                                     <input type="text" value={user.email} disabled class="form-control custom-form" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Tên tài khoản</label>
+                                    <div class="col-sm-10">
+                                    <input type="text" name="name" onChange={onChangeForm} class="form-control custom-form" value={valueForm.name}/>
                                     </div>
                                 </div>
                                 <div class="form-group">

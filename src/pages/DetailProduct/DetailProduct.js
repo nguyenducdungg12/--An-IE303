@@ -7,22 +7,38 @@ import SlideProduct from '../../components/Slider/slideproduct';
 import ConfigProduct from '../../components/DetailProduct/ConfigProduct'
 import Comment from '../../components/DetailProduct/Comment'
 import parse from 'html-react-parser';
+import Loader from "react-loader-spinner";
+import {Link} from 'react-router-dom'
 
 function DetailProduct(props) {
     const {id} = props.match.params;
     const [MoreContent, setMoreContent] = useState(false);
     const [Product, setProduct] = useState(null);
-   
+    const [ProductRecommend,setProductRecommed] = useState(null);
+    const [ProductPk,setProductPk] = useState(null);
+    const [Loading,SetLoading] = useState(false);
     useEffect(() => {
         async function getProduct(){
-            var data = await CallApi({
+            SetLoading(true);
+            var dataProduct = await CallApi({
                 url : `http://localhost:8080/api/detailproducts/${id}`,
                 method : 'get'
             })
-            setProduct(data);
+            var dataProductRecommend = await CallApi({
+                url : `http://localhost:8080/api/products/Laptop?type=1`,
+                method : 'get'
+            })
+            var dataProductPk = await CallApi({
+                url : `http://localhost:8080/api/products/PK`,
+                method : 'get'
+            })
+            setProduct(dataProduct);
+            setProductPk(dataProductPk);
+            setProductRecommed(dataProductRecommend);
+            SetLoading(false);
         }   
         getProduct();
-    }, [])
+    }, [id])
     function onShowMoreContent(){
         setMoreContent(true);
     }
@@ -31,6 +47,8 @@ function DetailProduct(props) {
     }
     return (Product &&
         <div className="DetailProduct">
+            {Loading ? <Loader type="Circles" color="#f50057" height={100} width={100} style={{textAlign:'center',width:'100%'}}/>
+               :
             <div className="container">
                 <Breadcum ListBreadcum={[Product.category]} final={Product.title}/>
                 <div className="row">
@@ -78,15 +96,16 @@ function DetailProduct(props) {
                         </div>
                     </div>
                 </div>
-                <div className="row">
+                
+               <div className="row">
                     <div className="home col-lg-12">
                         <div class="header-part-2 ">
                             <div class="header-text">
                                 <h1 class="header-title-1">Sản phẩm tương tự</h1>
-                                <a href="../Trangsanpham/banchay.html" class="header-a">Xem tất cả</a>
+                                <Link to={"/Products/Laptop"} class="header-a">Xem tất cả</Link>
                             </div>
                         </div>
-                        <SlideProduct/>
+                       {ProductRecommend&& <SlideProduct ListProduct={ProductRecommend.listProducts}/>}
                     </div>
                 </div>
                 <div className="row">
@@ -94,10 +113,10 @@ function DetailProduct(props) {
                         <div class="header-part-2 ">
                             <div class="header-text">
                                 <h1 class="header-title-1">Sản phẩm đi kèm</h1>
-                                <a href="../Trangsanpham/banchay.html" class="header-a">Xem tất cả</a>
+                                <Link to={"/Products/PK"} class="header-a">Xem tất cả</Link>
                             </div>
                         </div>
-                        <SlideProduct/>
+                        {ProductPk&&<SlideProduct ListProduct={ProductPk.listProducts}/>}
                     </div>
                 </div>
            
@@ -121,7 +140,7 @@ function DetailProduct(props) {
                         <Comment id={id}/>
                     </div>
                 </div>
-            </div>
+            </div>}
         </div>
     )
 }

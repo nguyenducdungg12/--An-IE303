@@ -37,7 +37,7 @@ function Order(props) {
         else if(!user){
             history.push('/');
         }
-    },[history])
+    },[history,user])
     useEffect(() => {
         setListOrder({
             ...ListOrder,

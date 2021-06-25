@@ -31,7 +31,7 @@ const Header = () => {
     function DropdownUser(){
         setuserDropdown(!userDropdown);
      }
-     useEffect(() => {
+     /* useEffect(() => {
          window.addEventListener("scroll",(e)=>{
              if(e.target.defaultView.scrollY>100){
                 setHideHeader(true);
@@ -40,7 +40,7 @@ const Header = () => {
                 setHideHeader(false);
              }
          })
-     }, [])
+     }, []) */
     const [searchValue, setsearchValue] = useState(null);
     function onChangeValue(e) {
         setsearchValue(e.target.value);
@@ -85,7 +85,7 @@ const Header = () => {
             <div class="banner_header">
                 <img src={banner} alt="" class="banner-img" />
             </div>
-            <nav style={HideHeader ? {position:"fixed",width:"100%",boxShadow:"0px 4px 24px 0px rgba(0, 0, 0, 0.06)"} : {}}>
+            <nav style={HideHeader ? {/* position:"fixed",width:"100%",boxShadow:"0px 4px 24px 0px rgba(0, 0, 0, 0.06)" */} : {}}>
                 <div class="container">
                     <div class="nav-wrap">
                         <Link to="/">
@@ -170,7 +170,7 @@ const Header = () => {
                                             <span>Laptop</span>
                                         </li>
                                     </Link>
-                                    <Link to='/Products/Màn hình'>
+                                    <Link to='/Products/Màn Hình'>
                                         <li class="header-category-item">
                                             <img src={manhinh} alt="" class="header-category-item-img" />
                                             <span>Màn Hình</span>

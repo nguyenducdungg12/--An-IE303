@@ -156,7 +156,11 @@
     border-top-right-radius: 4px;
     background-repeat: no-repeat;
 }
-
+.custom-home-product-item-image{
+    width: 234.4px;
+    height: 234.4px;
+    object-fit: contain;
+}
 .home-product__item-name{
     font-size: 14px;
     font-weight: 100;

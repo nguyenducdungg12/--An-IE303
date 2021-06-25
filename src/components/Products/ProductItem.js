@@ -6,8 +6,10 @@ const ProductItem = (props) => {
     return (
         <div class="grid__column-2-4">
             <Link to={`/detailProduct/${id}`} class="home-product__item">
-                <div class="home-product__img" style={{ backgroundImage: `url(${image})` }}></div>
-                <div style={{ margin: "0 16px" }}>
+                {/* <div class="home-product__img" style={{ backgroundImage:y}}></div> */}
+            
+             <img src={image} alt="" class="custom-home-product-item-image"/>
+                     <div style={{ margin: "0 16px" }}>
                     <p class="home-product__item-name">{title}</p>
                     <p class="home-product__item-quantity">Chỉ còn {quantity} sản phẩm</p>
                     <div class="home__product-item-price">

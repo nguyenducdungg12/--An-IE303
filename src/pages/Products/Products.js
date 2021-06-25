@@ -73,7 +73,7 @@ const Products = (props) => {
     return (
         <div class="body">
             <div class="grid">
-                <Breadcum final="Laptop"></Breadcum>
+                <Breadcum final={category}></Breadcum>
                 <ProductSort category={category} type={type} search={value} changeOption ={changeOption}></ProductSort>
             </div>
             <div class="home-product">
