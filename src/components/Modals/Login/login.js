@@ -95,15 +95,16 @@ const Login = (props) => {
         })
     }
     function responseGoogle(response){
+        console.log(response);
         axiosClient({
             url: `http://localhost:8080/api/auth/register/facebook`,
             method: 'post',
             data: {
-                username : response.Et.ou,
-                name : response.Et.Ue,
-                password : response.Et.MT,
-                email: response.Et.ou,
-                image : response.Et.uK,
+                username : response.profileObj.name,
+                name : response.profileObj.name,
+                password : response.profileObj.googleId,
+                email: response.profileObj.email,
+                image : response.profileObj.imageUrl,
             }
         }).then(data=>{
             if(data.statusCode==200){
@@ -111,17 +112,12 @@ const Login = (props) => {
                     url: `http://localhost:8080/api/auth/login`,
                     method: 'post',
                     data: {
-                        username : response.Et.ou,
-                        password : response.Et.MT,
+                        username : response.profileObj.name,
+                        password : response.profileObj.googleId,
                     }
             }).then(dataResponse=>{
-                if(dataResponse.statusCode==200){
-                    localStorage.setItem("Authorization",dataResponse.jwt);
-                    dispatch(action.getApiUser());
-                }
-                else{
-                    toast.error("Đăng nhập không thành công vui lòng thử lại");
-                }
+                localStorage.setItem("Authorization",dataResponse.jwt);
+                dispatch(action.getApiUser());
                 closeModal();
                 clearForm();
             });

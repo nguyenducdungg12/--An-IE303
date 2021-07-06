@@ -140,7 +140,7 @@ function Comment(props) {
     const query = useQuery();
     const page = query.get("page") || 1;
     const [comment, setcomment] = useState({
-        VoteStart: 1,
+        VoteStart: 5,
         content: "",
     })
     function isRenderComments() {

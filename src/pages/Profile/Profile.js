@@ -4,7 +4,9 @@ import {useDispatch,useSelector} from 'react-redux'
 import *as action from '../../actions/user'
 import axiosClient from '../../helper/axiosClient'
 import { toast } from 'react-toastify'
+import {useHistory} from 'react-router-dom'
 function Profile(props) {
+    const history = useHistory();
     const {renderPage} = props;
     const dispatch = useDispatch();
     const ref = useRef(null);
@@ -17,7 +19,6 @@ function Profile(props) {
         currentPassword:"",
         newPassword : "",
     })
-    const {history} = props;
     const user = useSelector(state => state.user);
     useEffect(() => {
         if(user){

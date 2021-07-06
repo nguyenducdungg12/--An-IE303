@@ -96,12 +96,12 @@ function DetailProductComponent(props) {
                         <div className="css-6 css-1002">
                             <h1 className="css-7">{Product.title}</h1>
                             <h6 className="css-8">Thương hiệu <span className="css-12">MSI</span> <span className="css-1001"></span>  {`SKU:${Product.id}`} </h6>
-                            <h1 className="css-10">{transferPrice(Product.newprice)}đ</h1>
+                            <h1 className="css-10">{transferPrice(Product.oldprice)}đ</h1>
                         </div>
                         <div className="css-30 css-1002">
                             <div className="css-31">Chọn thêm 1 trong những khuyến mãi sau</div>
                             <div className="css-32">
-                                <div className="css-33">Giá: <span>{transferPrice(Product.oldprice)}đ</span> </div>
+                                <div className="css-33">Giá: <span>{transferPrice(Product.newprice)}đ</span> </div>
                                 <div className="css-34">Đã giảm thêm <span>{transferPrice(Product.oldprice - Product.newprice)}</span> </div>
                             </div>
                             <div className="css-35">

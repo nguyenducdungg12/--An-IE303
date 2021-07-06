@@ -21,6 +21,7 @@ function Client() {
   function renderPage(){
     setRender(!Render);
   }
+  console.log(1234);
     return (
         <div className="App">
         <Header></Header>

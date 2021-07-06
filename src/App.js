@@ -13,9 +13,7 @@ function App() {
       if(token){
         dispatch(action.getApiUser());
       }
-  },)
-
-
+  })
   return (
     <Router>
       <Switch>
