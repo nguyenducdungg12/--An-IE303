@@ -29,6 +29,7 @@ function ForgotPassword(props) {
                     password : value.password,
                 }
             }).then(data=>{
+                console.log(data);
                 if(data.status!=200){
                     toast.error("Đổi mật khẩu không thành công");
                 }

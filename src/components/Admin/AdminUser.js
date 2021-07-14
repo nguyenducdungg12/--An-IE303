@@ -6,16 +6,17 @@ import { toast } from 'react-toastify';
 
 
 function AdminUserItem(props) {
-    const {username,email,role,image,enable,id} = props.data;
+    const {username,email,role,image,enable,_id} = props.data;
     const {isReRender} = props;
     function onUpadatedAdmin(){};
     function onDeleteUser(){
         AxiosClient({
             url : "http://localhost:8080/api/auth/user",
-            method:"delete",
-            data:id,
+            method:"DELETE",
+            data:{
+                id : _id,
+            },
         }).then(data=>{
-            console.log(data);
             if(data=="Thành công"){
                 isReRender();
                 toast.success("Xóa Thành Công");

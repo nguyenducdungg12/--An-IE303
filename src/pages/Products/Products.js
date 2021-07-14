@@ -26,7 +26,6 @@ const Products = (props) => {
     const { category } = props.match.params;
     const type = query.get("type") || 1;
     const value=query.get("q")||null;
-    
     useEffect(() => {
         const getProduct = async () => {
             setListProduct({...ListProduct,isLoading:true})

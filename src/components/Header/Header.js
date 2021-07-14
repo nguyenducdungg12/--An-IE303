@@ -80,7 +80,6 @@ const Header = () => {
         localStorage.removeItem("Authorization");
         dispatch(action.logOutUser());
     }
-    console.log(12345);
     return (
         <header>
             <div class="banner_header">
@@ -115,7 +114,7 @@ const Header = () => {
                                             Hồ Sơ
                                         </Link>
                                         {
-                                            user.role=="ADMIN" && <Link to='/admin' className="header__user__dropdown--link"  onClick={()=>setuserDropdown(false)}>
+                                            user.role=="ADMIN" && <Link to='/admin/notification' className="header__user__dropdown--link"  onClick={()=>setuserDropdown(false)}>
                                             Admin
                                         </Link> 
                                         }

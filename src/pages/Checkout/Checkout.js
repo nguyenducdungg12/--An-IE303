@@ -15,7 +15,7 @@ function Checkout() {
         quanhuyen: "",
         phuongxa: "",
         sonha:"",
-        payment:0
+        payment:1
     });
     const [keylocal, setkeylocal] = useState({
         city: null,
@@ -85,13 +85,12 @@ function Checkout() {
                 url : "http://localhost:8080/api/auth/payment/create",
                 method : "post",
                 data : {
-                    adress : renderAddress(),
+                    address : renderAddress(),
                     products : cart,
                     payment : formPayment.payment,
                     price : renderTotalMoney(),
                 }
             }).then(data=>{
-                console.log(data);
                 if(data.code=="00"){
                     window.location.href = data.data;
                 }
@@ -102,7 +101,7 @@ function Checkout() {
             url : 'http://localhost:8080/api/auth/order',
             method : 'post',
             data : {
-                adress : renderAddress(),
+                address : renderAddress(),
                 products : cart,
                 payment : formPayment.payment,
             }

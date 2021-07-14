@@ -65,8 +65,8 @@ function AddProduct(props) {
         formData.append('title', FormValue.title);
         formData.append('newprice', FormValue.newprice);
         formData.append('oldprice', FormValue.oldprice);
-        if(data&&data.id){
-            formData.append('id', data.id);
+        if(data&&data._id){
+            formData.append('id', data._id);
             axiosClient({
                 url: "http://localhost:8080/api/product",
                 method: "put",
@@ -80,7 +80,6 @@ function AddProduct(props) {
             })
         }
         else{
-
             axiosClient({
                 url: "http://localhost:8080/api/product",
                 method: "post",
@@ -179,7 +178,7 @@ function AddProduct(props) {
 }
 function AdminProductItem(props) {
     const dispatch = useDispatch();
-    const { title,newprice,quantity,oldprice,image,type,category,id } = props.data;
+    const { title,newprice,quantity,oldprice,image,type,category,_id } = props.data;
     const {RenderListProduct} = props;
     function onUpdateProduct(){
         dispatch(action.UpdateProduct(props.data));
@@ -187,8 +186,10 @@ function AdminProductItem(props) {
     function onDeleteProduct(){
         axiosClient({
             url:"http://localhost:8080/api/product",
-            method:"delete",
-            data : id,
+            method:"DELETE",
+            data : {
+                id  :_id,
+            }         
         }).then(data=>{
             if(data=="Thành công"){
                 RenderListProduct();
@@ -201,7 +202,7 @@ function AdminProductItem(props) {
     }
     return (
         <tr>
-            <td class="product-thumbnail"><img src={image} alt="product1" /></td>
+           <td class="product-thumbnail"><img src={image} alt="product1" /></td>
             <td class="product-name">{title}</td>
             <td class="product-price">{oldprice}</td>
             <td class="product-price">{newprice}</td>

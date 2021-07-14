@@ -2,10 +2,10 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 import TransferPrice from '../../helper/TransferPrice'
 const ProductItem = (props) => {
-    const {title,image,quantity,newprice,oldprice,id}=props.item;
+    const {title,image,quantity,newprice,oldprice,_id}=props.item;
     return (
         <div class="grid__column-2-4">
-            <Link to={`/detailProduct/${id}`} class="home-product__item">
+            <Link to={`/detailProduct/${_id}`} class="home-product__item">
                 {/* <div class="home-product__img" style={{ backgroundImage:y}}></div> */}
             
              <img src={image} alt="" class="custom-home-product-item-image"/>

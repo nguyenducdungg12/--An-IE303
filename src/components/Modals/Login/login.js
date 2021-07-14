@@ -95,7 +95,6 @@ const Login = (props) => {
         })
     }
     function responseGoogle(response){
-        console.log(response);
         axiosClient({
             url: `http://localhost:8080/api/auth/register/facebook`,
             method: 'post',

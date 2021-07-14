@@ -29,7 +29,10 @@ AxiosInstance.interceptors.response.use((response)=>{
     return response;
 },
     (err)=>{
-        throw err;
+        localStorage.removeItem("Authorization");
+        alert("Phiên đăng nhập đã hết hạn! vui lòng đăng nhập lại để tiếp tục...");
+        //    window.location.href="/";
+         throw err;
     }
 )
 export default AxiosInstance;

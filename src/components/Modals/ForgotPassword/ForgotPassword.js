@@ -23,6 +23,7 @@ function Register(props) {
                 email : Email,
             },
         }).then(data=>{
+            console.log(data);
             if(data.status==200){
                 toast.success(data.msg);
             }

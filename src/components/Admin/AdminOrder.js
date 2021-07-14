@@ -61,7 +61,7 @@ function AdminOrderItem(props) {
     function onCancleOrder(){
         confirmAlert({
             title: 'Cảnh báo',
-            message: 'Bạn có chắc muốn xóa đơn hàng không?',
+            message: 'Bạn có chắc muốn hủy đơn hàng không?',
             buttons: [
                 {
                     label: 'Yes',

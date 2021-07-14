@@ -47,14 +47,12 @@ function Order(props) {
             url: "http://localhost:8080/api/auth/order",
             method:"get"
         }).then(data=>{
-            
             setListOrder({
                 isLoading:false,
                 data:data,
             })
         })
     }, [render])
-   
     function isRender(){
         return setrender(!render);
     }
